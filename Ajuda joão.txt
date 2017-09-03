@@ -1,0 +1,34 @@
+
+
+vi exptb_perfs.sh
+i
+
+DIR=/home/oracle/teor/perfstat
+
+BASH=~/.bash_profile
+
+if [ -e "$BASH" ]; then
+  . $BASH
+else
+  BASH=~/.profile
+  . $BASH
+fi
+
+ps -ef | grep "_smon_" | grep -v "+ASM" | grep -v "+asm" | grep -v "rman" | grep -v "grep" | sed 's/.*mon_\(.*\)$/\1/' | \
+while read instance_db
+do
+export ORACLE_SID=$instance_db
+
+exp \'/ as sysdba\' file=$DIR/perfstat_$ORACLE_SID.dmp log=$DIR/perfstat_$ORACLE_SID.log tables=PERFSTAT.STATS\$SQLTEXT,PERFSTAT.STATS\$SNAPSHOT,PERFSTAT.STATS\$SQL_SUMMARY,PERFSTAT.STATS\$SQLTEXT STATISTICS=NONE
+
+if [ -f $DIR/perfstat_$ORACLE_SID.dmp ]
+then
+   tar -cvzf $DIR/perfstat_$ORACLE_SID.dmp.tar.gz $DIR/perfstat_$ORACLE_SID.dmp
+   rm -f $DIR/perfstat_$ORACLE_SID.dmp
+fi
+
+done
+
+
+:wq!
+

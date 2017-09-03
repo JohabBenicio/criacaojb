@@ -1,0 +1,252 @@
+<html>
+<head>
+
+<style>
+#table_result {
+    width:100%
+    
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 3px;
+}
+
+</style>
+
+<title> JB - Calculo Gasolina - Alcool</title>
+<script type="text/javascript">
+window.onload = function(){
+
+  var i = function(id){ return document.getElementById(id); }
+
+  i("calcula").onclick = function(){
+    var v_gas       = i("valor_gasolina").value;
+    var v_alc       = i("valor_alcool").value;
+    var qtd_litro   = i("qtd_litro").value;
+    var km_gas      = i("km_gasolina").value;
+    var km_alc      = i("km_alcool").value;
+
+/*       
+  km percorrido com os litros passados.
+*/
+    var qtd_km_gas  = qtd_litro * parseFloat(km_gas.replace(',', '.'), 10);
+    var qtd_km_alc  = qtd_litro * parseFloat(km_alc.replace(',', '.'), 10);
+
+/*       
+  Valor gasto com combustivel
+*/
+    var val_tot_gas = parseFloat(v_gas.replace(',', '.'), 10) * qtd_litro;
+    var val_tot_alc = parseFloat(v_alc.replace(',', '.'), 10) * qtd_litro;
+
+/*       
+  Diferença de km entre os combustiveis
+*/
+    var dif_km      = qtd_km_gas - qtd_km_alc;
+
+/*       
+  Diferenca da quilometragem dividido pelo gasto por litro do alcool
+*/
+    var diff_alcool = parseInt(dif_km) / parseFloat(km_alc.replace(',', '.'), 10);
+
+/*       
+  Total gasto com o Alcool
+
+*/
+    var tot_gasto_alc_01 = parseInt(diff_alcool) * parseFloat(v_alc.replace(',', '.'), 10);
+    var tot_gasto_alc_02 = tot_gasto_alc_01 + val_tot_alc;
+
+
+    i("tot_lit_alc").innerHTML     = parseInt(diff_alcool) + parseInt(qtd_litro);
+    i("tot_gasto_alc").innerHTML   = parseInt(tot_gasto_alc_02);
+
+    i("v_qtd_km_gas_01").innerHTML = parseInt(qtd_km_gas);
+    i("v_qtd_km_gas_02").innerHTML = parseInt(qtd_km_gas); 
+    i("v_qtd_km_alc_01").innerHTML = parseInt(qtd_km_alc);
+    i("v_qtd_km_alc_02").innerHTML = parseInt(qtd_km_alc);
+    i("diff_alcool").innerHTML     = parseInt(diff_alcool);
+
+    i("litro_01").innerHTML = parseInt(qtd_litro);
+    i("litro_02").innerHTML = parseInt(qtd_litro);
+    i("tot_gas").innerHTML  = String(val_tot_gas.toFixed(2)).formatMoney();
+    i("tot_alc").innerHTML  = String(val_tot_alc.toFixed(2)).formatMoney();
+    i("dif_km").innerHTML   = parseInt(dif_km);
+
+
+    if ( tot_gasto_alc_02 > val_tot_gas ) {
+        i("best_option").innerHTML = "GASOLINA";
+    } else { 
+        i("best_option").innerHTML = "ALCOOL";
+    }
+
+  }
+}
+
+String.prototype.formatMoney = function() {
+  var v = this;
+
+  if(v.indexOf('.') === -1) {
+    v = v.replace(/([\d]+)/, "$1,00");
+  }
+
+  v = v.replace(/([\d]+)\.([\d]{1})$/, "$1,$20");
+  v = v.replace(/([\d]+)\.([\d]{2})$/, "$1,$2");
+  v = v.replace(/([\d]+)([\d]{3}),([\d]{2})$/, "$1.$2,$3");
+
+  return v;
+};
+
+
+
+
+</script>
+</head>
+<body>
+
+
+<fieldset>
+  <a href="http://www.precodoscombustiveis.com.br/#/Osasco%20%20-%20São%20Paulo">Consulte o valor do combustivel!</a>
+</fieldset>
+
+
+<fieldset id="c">
+
+<br>
+<table>
+  <tr>
+    <td>
+      Km's por litro (Gasolina):
+    </td>
+    <td>
+      <input type="text" id="km_gasolina" />
+    </td>
+
+    <td>
+      Km's por litro (Alcool):
+    </td>
+    <td>
+      <input type="text" id="km_alcool" />
+    </td>
+  </tr>
+
+
+  <tr>
+    <td>
+      Valor da Gasolina:
+    </td>
+    <td>
+      <input type="text" id="valor_gasolina" />
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      Valor da Alcool:
+    </td>
+    <td>
+      <input type="text" id="valor_alcool" />
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      Quantidade de litros:
+    </td>
+    <td>
+      <input type="text" id="qtd_litro" />
+    </td>
+  </tr>
+
+</table>
+
+
+    <!-- http://www.precodoscombustiveis.com.br/posto/5738/posto-graal -->
+
+<button id="calcula">calcular</button>
+</fieldset>
+<br>
+<fieldset>
+  Melhor escolha: <span id="best_option">Nenhum</span>
+</fieldset>
+
+
+</br>
+
+<table id="table_result">
+  <tr>
+    <th>Gasolina com <span id="litro_01">0</span> litros.</th>
+    <th>Alcool com <span id="litro_02">0</span> litros.</th>
+  </tr>
+
+  <tr>
+    <td>
+      Valor a pagar: R$ <span id="tot_gas">0</span>.
+    </td>
+    <td>  
+      Valor a pagar: R$ <span id="tot_alc">0</span>.
+    </td>
+  <tr\>
+
+  <tr>
+    <td>
+      Vai andar <span id="v_qtd_km_gas_01">0</span> Km(s).
+    </td>
+    <td>  
+      Vai andar <span id="v_qtd_km_alc_01">0</span> Km(s).
+    </td>
+  <tr\>
+
+</table>
+<br>
+<table width="100%">
+<caption>Diferenca de quilometragem</caption>
+    <tr >
+      <th>
+         <span id="v_qtd_km_gas_02">0</span> Km(s) - <span id="v_qtd_km_alc_02">0</span> Km(s) 
+      </th>
+    <tr\>
+
+    <tr>
+      <td style="text-align:center">
+        <span id="dif_km" style="font-size: 20; color: red;" >0</span> Km(s).
+      </td>
+    </tr>
+</table>
+
+<br>
+
+<table width="100%">
+  <caption>Diferenca da quilometragem dividido pelo gasto por litro do alcool</caption>
+
+    <tr>
+      <td style="text-align:center"> 
+        <span id="diff_alcool" style="font-size: 20; color: red;">0</span> litros de alcool a mais para andar a mesma quantidade que a gasolina.
+      </td>
+    </tr>
+
+</table>
+
+<br>
+
+<table width="100%">
+  <caption>Total gasto com o Alcool!</caption>
+
+    <tr>
+      <td style="text-align:center"> 
+       <b> R$ <span id="tot_gasto_alc" style="font-size: 20; color: red;">0</span> com um total de <span id="tot_lit_alc" style="font-size: 20; color: red;">0</span> litros de alcool.</b>
+      </td>
+    </tr>
+
+</table>
+
+
+
+
+
+</body>
+</html>
+
+

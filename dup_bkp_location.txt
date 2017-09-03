@@ -1,0 +1,18 @@
+ nohup rman auxiliary / cmdfile xpto.rcv msglog xpto.log &
+
+ 
+################# arquivo xpto.rcv
+run
+{
+allocate auxiliary channel C1 device type disk;
+allocate auxiliary channel C2 device type disk;
+allocate auxiliary channel C3 device type disk;
+allocate auxiliary channel C4 device type disk;
+allocate auxiliary channel C5 device type disk;
+allocate auxiliary channel C6 device type disk;
+set newname for database to '+DGHOMO';
+SET UNTIL TIME "TO_DATE('14-03-2017 02:00:00','dd-mm-yyyy hh24:mi:ss')";
+duplicate database to homolog
+backup location '/u03/backup/erpm/fisico';
+}
+

@@ -1,0 +1,162 @@
+DADOS COLETADOS
+- Locks atuais.
+
+SYS@mat12 > select l2.ctime from gv$lock l1, gv$lock l2 where l1.block>0 and l2.block=0 and l1.id1=l2.id1 and l1.id2=l2.id2;
+
+no rows selected
+
+
+Nesse momento não existe locks de sessão.
+Estamos encaminhando esse chamado para o encerramento.
+
+
+
+
+
+
+
+
+select l2.ctime from gv$lock l1, gv$lock l2 where l1.block>0 and l2.block=0 and l1.id1=l2.id1 and l1.id2=l2.id2 and l2.ctime>250;
+
+
+select l2.ctime from gv$lock l1, gv$lock l2 where l1.block>0 and l2.block=0 and l1.id1=l2.id1 and l1.id2=l2.id2;
+
+
+
+
+DADOS COLETADOS
+===============
+1) - Locks atuais.
+
+SQL> select l2.ctime from gv$lock l1, gv$lock l2 where l1.block>0 and l2.block=0 and l1.id1=l2.id1 and l1.id2=l2.id2 and l2.ctime>250;
+
+no rows selected
+
+Nesse momento não existe locks de sessão com mais de 15 minutos.
+
+
+
+
+
+
+
+
+
+
+
+CLARIFICAÇÃO INCIDENTE
+- Lock de sessão.
+
+AÇÕES EXECUTADAS (resumo)
+- Acesso ao ambiente;
+- Realizado análise de lock de sessão.
+
+DADOS COLETADOS
+- Resultado da query:
+
+- ------------------------------------------ -
+- NAO EXISTE LOCKS DE USUARIOS NESTE MOMENTO -
+- ------------------------------------------ -
+
+Com base na informação acima, podemos afirmar que não tem lock de sessão neste momento no banco de dados.
+
+O alerta cessou da ferramenta de monitoração e o chamado será encerrado.
+
+
+
+
+
+
+Lock de sessao encontrado a mais
+
+
+=======================================================================================================================================
+=======================================================================================================================================
+=======================================================================================================================================
+=======================================================================================================================================
+=======================================================================================================================================
+
+
+fabio.nobre@censo-nso.com.br
+
+
+Assunto:
+Lock de sessão - DB VSBLSPT.
+
+
+Prezado Cliente,
+
+Foi identificado um lock de sessão no banco de dados VSBLSPT.
+Segue abaixo os dados coletados referente ao lock.
+
+
+DADOS COLETADOS
+- Dados do lock.
+
+
+
+
+
+
+
+
+Carlos Cristiano
+
+
+Fabio Nobre
+
+CHAMADA TELEFÔNICA AO CLIENTE
+Contato telefônico com cliente em 08/08/2017 14:46, no número (11) 3286-7200 ramal: 7302.
+
+- Conforme solicitado, foi encerrado a sessão do usuário bloqueador.
+
+Não existe novos locks de sessão nesse momento.
+Estamos encaminhando esse chamado para o encerramento.
+
+
+
+
+
+
+
+
+Prezado Cliente,
+
+Favor nos informar se podemos derrubar a sessão responsável pelo lock, ou aguardemos a liberação por parte do usuário.
+Obs.: A sessão causadora do lock não esta executando nenhum processo no banco de dados nesse momento.
+
+Aguardamos vossas considerações.
+
+
+
+
+
+
+
+CHAMADA TELEFÔNICA AO CLIENTE
+Contato telefônico com cliente em 11/08/2017 11:06, no número (19) 99872-9155.
+
+Conforme alinhado, aguardaremos o retorno do cliente, para darmos continuidade no atendimento do chamado.
+
+Favor nos informar se podemos derrubar a sessão responsável pelo lock, ou aguardemos a liberação por parte do usuário.
+Obs.: A sessão causadora do lock não esta executando nenhum processo no banco de dados nesse momento.
+
+Aguardamos vossas considerações.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Favor nos informar se a causa do restart do servidor atv-rac-02 foi ocasionado devido a queda da energia elétrica.
+
+
+
+

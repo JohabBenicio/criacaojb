@@ -1,0 +1,6 @@
+TTL=64 = *nix - the hop count so if your getting 61 then there are 3 hops and its a *nix device. Most likely Linux.
+
+TTL=128 = Windows - again if the TTL is 127 then the hop is 1 and its a Windows box.
+
+TTL=254 = Solaris/AIX - again if the TTL is 250 then the hop count is 4 and its a Solaris box.
+

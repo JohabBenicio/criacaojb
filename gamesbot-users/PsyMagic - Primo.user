@@ -1,0 +1,15 @@
+{
+"GlobalLoginEnable":"1",
+"MobileId":"03050000000000000000000000000000",
+"Name":"PsyMagic - Primo",
+"LoginToken":"02040000000000000000000000000000",
+"UID":"1254567",
+"World":"99",
+"MobileInfo":"{\"osName\":\"Linux\",\"osVersion\":\"0.0.0\",\"mac0\":\"00:00:00:00:00:00\",\"macAll\":null,
+\"mobileId\":\"03050000000000000000000000000000\",\"udid\":null,\"manufactor\":\"no\",\"model\":\"no\",
+\"systemLanguage\":\"pt-BR\",\"carrierName\":\"no\",\"MNC\":\"00\",\"MCC\":\"000\",\"OpenUDID\":
+\"WIFIMAC:00:00:00:00:00:00\",\"deviceIFA\":null,\"gameVersion\":\"5.0.0\",\"country_code\":null,\"usertype\":
+\"202\",\"venderIDF\":null,\"density\":2,\"deviceID\":\"0000000000000000\"}","RequestNumber":1,
+"MainLogin":"allissonbenicio@gmail.com",
+"MainPass":"36090786",
+}

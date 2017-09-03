@@ -1,0 +1,61 @@
+https://groups.google.com/forum/#!topic/open-iscsi/DvjwZNbOHV8
+
+Is there a list somewhere of what the various error codes mean?
+kernel: sd 2:0:0:1: SCSI error: return code = 0x00010000
+kernel: sd 2:0:0:1: SCSI error: return code = 0x00020000
+kernel: sd 2:0:0:1: SCSI error: return code = 0x00040000
+kernel: sd 2:0:0:1: SCSI error: return code = 0x00050000
+kernel: sd 2:0:0:1: SCSI error: return code = 0x06000000
+
+0x00020000 seems to happen when the TCP connection is closed, but what
+about the rest?
+
+I don't see ASC/ASCQ values so I assume these aren't coming back from
+the target as such.
+
+Thanks
+
+
+
+
+###########################################################
+# kernel: sd 2:0:0:1: SCSI error: return code = 0x00010000
+###########################################################
+DID_NO_CONNECT
+
+iscsi layer returns this if replacement/recovery timeout seconds has
+expired or if user asked to shutdown session.
+
+###########################################################
+# kernel: sd 2:0:0:1: SCSI error: return code = 0x00020000
+###########################################################
+DID_BUS_BUSY
+
+iscsi layer returns this to ask scsi layer to requeue IO, when there is
+a connection error.
+
+###########################################################
+# kernel: sd 2:0:0:1: SCSI error: return code = 0x00040000
+###########################################################
+
+DID_BAD_TARGET iscsi layer returns this when we get some bad output from
+target. For example if the target indicates there was underflow but the
+iscsi pdu's rescount does not indicate it.
+
+###########################################################
+# kernel: sd 2:0:0:1: SCSI error: return code = 0x00050000
+###########################################################
+DID_ABORT if the scsi error handler asked us to abort a command and it
+was successfully aborted we fail it with this.
+
+###########################################################
+# kernel: sd 2:0:0:1: SCSI error: return code = 0x06000000
+###########################################################
+DRIVER_TIMEOUT.
+You had a timeout on your IO.
+
+- define DID_TRANSPORT_FAILFAST  0x0f /* Transport class fastfailed the io */
+
+It means the replacement/recovery timeout fired and the iscsi/scsi layer failed the IO.
+
+
