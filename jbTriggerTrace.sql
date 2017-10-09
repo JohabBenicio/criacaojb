@@ -13,14 +13,14 @@
 -- Gerar o DDL da trigger.
 
 SET LONG 99999 LINES 200 PAGES 300
-SELECT DBMS_METADATA.GET_DDL('TRIGGER', 'LOGON_TRIGGER', 'RROCHA' ) txt FROM DUAL;
+SELECT DBMS_METADATA.GET_DDL('TRIGGER', 'TRG_LOGON_10046', 'SYS' ) txt FROM DUAL;
 
 -- Analisar Status da trigger.
 
 set lines 200
 col owner for a20
 col TRIGGER_NAME for a30
-select OWNER,TRIGGER_NAME,STATUS from dba_triggers where upper(TRIGGER_NAME) like 'LOGON%';
+select OWNER,TRIGGER_NAME,STATUS from dba_triggers where upper(TRIGGER_NAME) like 'TRG_LOGON%';
 
 
 
@@ -105,13 +105,13 @@ create public synonym seq_traceflag_jb for seq_traceflag_jb;
 
 select distinct  privilege from dba_sys_privs where grantee='PUBLIC';
 
-select distinct  privilege from dba_sys_privs where grantee='CORRWIN';
+select distinct  privilege from dba_sys_privs where grantee='SOLUS';
 
 
 -- Caso não tenha a grant "alter session", então conceda para role PUBLI, mas não esqueça de revogar a mesma.
-grant alter session to CORRWIN;
+grant alter session to MERCURY;
 
-revoke alter session from CORRWIN;
+revoke alter session from MERCURY;
 
 
 -- ##############################################################################################################################
@@ -488,15 +488,15 @@ commit;
 -- ## Passo 7: Query para ajudar na identificação do usuario.
 -- ##############################################################################################################################
 
+TASY             HSL\M5118          macsilva           M5118          Tasy.exe
 
+define campo=RODRIGO
 
-define campo=CORRWIN
-
-select distinct sid,serial#,username,machine,osuser,terminal,program,status from gv$session
+select distinct sid,serial#,username,machine,osuser,terminal,program,status,client_info from gv$session
 where upper(username) like '%&&campo%' or upper(osuser) like upper('%&&campo%') or upper(terminal) like '%&&campo%';
 
 
-set lines 200 pages 999
+set lines 300 pages 999
 col program for a60
 col machine for a30
 select distinct username,machine,osuser,terminal,program from gv$session where username is not null order by 1;
@@ -511,26 +511,27 @@ select distinct username,machine,osuser,terminal,program from gv$session where u
 
 -- #####################################
 
-define campo=CORRWIN
+define campo=SOLUS
 
 col logon_time for a20
 col machine for a30
-col username for a20
-col osuser for a20
+col username for a30
+col osuser for a30
 col terminal for a15
 col kill_session for a55
 col tracefile for a100
 col program for a30
 col spid for 99999
 set lines 300 pages 300
-select distinct s.username,s.machine,s.osuser,s.terminal,s.sid,s.serial#,s.inst_id,s.status,s.sql_id,s.program
+select distinct s.username,s.machine,s.osuser,s.terminal,s.sid,s.serial#,s.inst_id,s.status,s.sql_id,s.client_info--,s.program
 from gv$session s, gv$process p
 where (upper(s.osuser)=upper('&&campo') or upper(s.username)=upper('&&campo') or upper(s.terminal)=upper('&&campo') or upper(machine)=upper('&&campo'))
 and p.addr = s.paddr
+and s.status='ACTIVE'
 order by s.sid;
 
 
-####### Ativar com base nas sessoes ativadas na tabela
+####### Ativar com base nas sessoes ativadas na tabela/
 
 
 col logon_time for a20
@@ -564,13 +565,13 @@ order by s.sid;
 -- ##############################################################################################################################
 
 
-exec prc_logon_10046_jb(username_in => 'CORRWIN', -
-host_in => 'COIN\COIN-2034', -
+exec prc_logon_10046_jb(username_in => 'SOLUS', -
+host_in => '*', -
 osuser_in => '*', -
 terminal_in => '*', -
 program_in => '*', -
 active_in => 'Y', -
-currents_in => 'N');
+currents_in => 'Y');
 
 
 
@@ -588,9 +589,20 @@ col HOST for a30
 col module for a20
 col detalhes for a76
 col program for a10
+set pages 9999
 select * from traceflag_jb;
 select * from tracehistory_jb order by 6;
 
+
+update traceflag_jb set flag=0;
+
+
+select * from tracehistory_jb order by 1,7;
+
+
+
+update traceflag_jb set FLAG=0;
+commit;
 
 
 -- ##############################################################################################################################

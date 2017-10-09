@@ -65,11 +65,16 @@ select OWNER,JOB_NAME,RUNNING_INSTANCE,ELAPSED_TIME from DBA_SCHEDULER_RUNNING_J
 
 
 
-select JOB_NAME,STATUS,LOG_DATE,ADDITIONAL_INFO from dba_scheduler_job_log where job_name like 'STATS%' and LOG_DATE > sysdate-7 order by 3 ;
+select JOB_NAME,STATUS,LOG_DATE,ADDITIONAL_INFO from dba_scheduler_job_log where job_name like 'STATS%' and LOG_DATE >= sysdate-1 order by 3 ;
+
+
+select JOB_NAME,STATUS,LOG_DATE,ADDITIONAL_INFO from dba_scheduler_job_log where LOG_DATE >= sysdate-1 and job_name!='JOB_WMS_MATA_LOCK' order by 3 ;
 
 
 
-select OWNER,JOB_NAME,RUNNING_INSTANCE,ELAPSED_TIME,SESSION_ID from DBA_SCHEDULER_RUNNING_JOBS;
+
+
+select OWNER,JOB_NAME,RUNNING_INSTANCE,ELAPSED_TIME,SESSION_ID from DBA_SCHEDULER_RUNNING_JOBS where job_name !='JOB_WMS_MATA_LOCK';
 
 
 conn logixprd/l1x9p
@@ -344,7 +349,7 @@ from dba_scheduler_jobs a, ALL_SCHEDULER_JOB_RUN_DETAILS b where a.job_name=b.jo
 
 
 
-
+select distinct status from ALL_SCHEDULER_JOB_RUN_DETAILS;
 
 
 col additional_info for a100
@@ -356,6 +361,76 @@ col comments for a80
 col owner for a15
 select job_name, to_char(log_date,'dd/mm/yyyy hh24:mi')
 from dba_scheduler_job_log where status = 'SUCCEEDED' and job_name like 'STATS_%' order by log_date;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+col job_name for a27
+SELECT job_name, session_id, running_instance, elapsed_time, cpu_used FROM dba_scheduler_running_jobs;
+
+
+
+JOB_HOTLISTINTELLIGENT
+
+
+
+
+
+
+set lines 200 pages 9999
+col COMMENTS for a80
+col JOB_ACTION for a80
+
+SELECT owner, job_name, enabled,JOB_ACTION FROM dba_scheduler_jobs where enabled='TRUE' and job_name='JOB_HOTLISTINTELLIGENT';
+
+
+
+OWNER        JOB_NAME                    ENABL JOB_ACTION
+------------ --------------------------- ----- --------------------------------------------------------------------------------
+MERCURY      JOB_HOTLISTINTELLIGENT      TRUE
+
+DECLARE V_RESULT NUMBER; V_RESULT_MSG VARCHAR2(500);
+BEGIN MERCURY.UDP_HOTLISTINTELLIGENT(13001, V_RESULT, V_RESULT_MSG, 20000);
+END;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+col additional_info for a100
+col job_action for a90
+col repeat_interval for a50
+alter session set nls_date_format='dd/mm/yyyy hh24:mi';
+set lines 200 pages 9999
+col comments for a80
+col owner for a15
+
+select job_name, max(to_date(trunc(log_date))) from dba_scheduler_job_log where job_name like 'STATS_%' group by job_name;
+select job_name, max(log_date),min(log_date) from dba_scheduler_job_log where job_name like 'STATS_%' group by job_name;
+
+select min(log_date),max(log_date) from dba_scheduler_job_log where job_name like 'STATS_%';
+
 
 
 

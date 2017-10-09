@@ -593,7 +593,7 @@ if [ ! -e "$ODS_HOME/config/default.conf" ]; then
 cat <<EOF
 
 cat <<JB>>$ODS_HOME/config/default.conf
-#HANDLE_JOB_PRIORITY=yes
+HANDLE_JOB_PRIORITY=yes
 JB
 
 

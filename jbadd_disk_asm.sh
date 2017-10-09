@@ -5,7 +5,7 @@ Scanning SCSI DISKS in Redhat Linux
 
 1. Listar os discos existentes
 
-fdisk -l | grep 'Disk /'
+fdisk -l | grep 'Disk /' | sort
 Disk /dev/sda: 53.6 GB, 53687091200 bytes
 Disk /dev/sdb: 1073 MB, 1073741824 bytes
 
@@ -134,7 +134,7 @@ DISK4
 
 # Criar o disco para o ASM
 
-oracleasm createdisk DISK5 /dev/sdd1  
+oracleasm createdisk DISK5 /dev/sdd1
 Writing disk header: done
 Instantiating disk: done
 You have new mail in /var/spool/mail/root

@@ -45,7 +45,12 @@ create sequence usr_monit_temp_p4t.seq_monit_temp minvalue 1 maxvalue 10000 star
 create or replace procedure usr_monit_temp_p4t.prc_monit_temp is
     id_line number;
     v_sqltext long;
+    valid number;
 begin
+
+select count(*) into valid from gv$tempseg_usage;
+
+if valid > 0 then
 
 select seq_monit_temp.nextval into id_line from dual;
 insert into usr_monit_temp_p4t.tb_monit_temp_01 (MNTM_ID,MNTM_VDATA) values (id_line,to_char(sysdate,'dd/mm/yyyy hh24:mi:ss'));
@@ -62,6 +67,7 @@ end loop;
 
 commit;
 
+end if;
 
 end;
 /

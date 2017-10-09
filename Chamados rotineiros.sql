@@ -1,12 +1,12 @@
 CHAMADA TELEFÔNICA AO CLIENTE
-Contato telefônico com o cliente em 25/08/2017 10:00, no número 11 45891341.
+Contato telefônico com o cliente em 03/10/2017 11:08, no número (11) 3394-5941.
 
 
 
 Prezado Cliente, bom dia.
 
 Por favor, siga o plano de ação descrito abaixo.
-Iremos aguardar a execução desta(s) ação(ões) para darmos continuidade no atendimento:
+Iremos aguardar a execução desta(s) ação(ões) para darmos continuidade ou encerramento no atendimento do chamado:
 
 PLANO DE AÇÃO DO CLIENTE
 - Favor endereçar informações aos responsáveis e nos reportar.
@@ -2595,13 +2595,22 @@ ________________________________________________________________________________
 
 
 
-A abertura desta solicitação ocorreu devido as atividades realizadas no chamado "76029 - problema de lentidão DBPRD411".
+A abertura desta solicitação ocorreu devido as atividades realizadas no chamado "Ticket#7308103 — Atualização RM 07/09/2017".
 Ambiente se estabilizou.
 Estamos encaminhando este chamado para o encerramento.
 
-Att,
-Johab Benicio.
-DBA Oracle.
+
+
+
+
+
+A abertura desta solicitação ocorreu devido as atividades realizadas no chamado "Ticket#7307913 — Readequação Ambiente Oracle [TGESTIONA]".
+
+DADOS COLETADOS
+- Dados atuais.
+
+Ambiente se encontra estável.
+Estamos encaminhando esse chamado para o encerramento.
 
 
 __________________________________________________________________________________________________
@@ -2946,7 +2955,7 @@ Johab Benício.
 
 
 
-Chamado aberto, devido as atividades executadas na solicitação "76034 - CVIASDBARREC02 - Consumo do ponto de montagem /u02 acima de 90%"
+Chamado aberto, devido as atividades executadas na solicitação "7310127 — Geração de Cartões"
 Estamos encaminhando este chamado para o encerramento.
 
 
@@ -6224,6 +6233,10 @@ Johab Benício.
 
 
 
+
+
+
+RMAN Duplicate from RAC backup fails ORA-38856 (Doc ID 334899.1)
 
 Quando da erro no final do duplicate de um RAC para um Single (teste/homologação)
 
@@ -22624,6 +22637,244 @@ Sugerimos que seja feita uma análise no hardware dos servidores com intuito de 
 
 
 Dados coletados no relatório em anexo.
+
+
+
+
+
+
+Prezado(a) Antonio Alves Silva, boa tarde.
+
+Complementando a interação anterior.
+Sugerimos que a Atlas abra um chamado junto ao fabricante do Hardware, afim de identificar informações que possam contribuir para identificar a causa das quedas abruptas.
+
+
+
+
+
+
+
+AÇÕES EXECUTADAS (resumo)
+- Executado o crosscheck do backup da base TEDESCO, para remoção das peças obsoletas.
+
+DADOS COLETADOS
+- Dados atuais.
+
+
+
+Com base nos dados coletados, podemos afirmar que o consumo de espaço da partição "/backup" encontra-se estável.
+Estamos encaminhando esse chamado para o encerramento.
+
+
+
+
+
+CHAMADA TELEFÔNICA AO CLIENTE
+Contato telefônico com o cliente em 05/09/2017 17:45, no número (011) 97690-3806.
+
+- Esclarecimento das dúvidas do cliente.
+
+CAUSAS PROVAVEIS
+- Este erro pode ser causado quando existir um outro processo realizando I/O no alvo do backup;
+- O controlfile sofreu alguma alteração no momento da execução do backup do controlfile.
+
+REFERENCIA
+- OERR: ORA-245 "control file backup failed; in Oracle RAC, target might not be on shared storage" (varies by version) Reference Note (Doc ID 2010544.1).
+
+DADOS COLETADOS
+- Informações coletadas do log de backup.
+
+(...)
+RMAN-03090: Starting backup at 03-SEP-17
+RMAN-08008: channel dev_0: starting full datafile backup set
+RMAN-08010: channel dev_0: specifying datafile(s) in backup set
+RMAN-08011: including current control file in backup set    <<<<<<<<< Controlfile já havia sido copiado para o backup.
+RMAN-08038: channel dev_0: starting piece 1 at 03-SEP-17
+[Normal] From: OB2BAR_SBT_CHANNEL@oraas029.grupodavo.davo.com.br "davoprd" Time: 03/09/2017 23:54:44
+    Starting OB2BAR Backup: oraas029.grupodavo.davo.com.br:Backup_D2D_DBF_RMSI<davoprd_76303:953769283:1>.dbf "Oracle8"
+
+[Normal] From: OB2BAR_SBT_CHANNEL@oraas029.grupodavo.davo.com.br "davoprd" Time: 03/09/2017 23:54:47
+    Backup Profile:
+
+        Run Time ........... 0:00:03
+        Backup Speed ....... 18,42 MB/s
+
+[Normal] From: OB2BAR_SBT_CHANNEL@oraas029.grupodavo.davo.com.br "davoprd" Time: 03/09/2017 23:54:47
+    Completed OB2BAR Backup: oraas029.grupodavo.davo.com.br:Backup_D2D_DBF_RMSI<davoprd_76303:953769283:1>.dbf "Oracle8"
+
+RMAN-08044: channel dev_0: finished piece 1 at 03-SEP-17
+RMAN-08530: piece handle=Backup_D2D_DBF_RMSI<davoprd_76303:953769283:1>.dbf tag=TAG20170903T235443 comment=API Version 2.0,MMS Version 65.9.0.114
+RMAN-08540: channel dev_0: backup set complete, elapsed time: 00:00:03
+RMAN-03091: Finished backup at 03-SEP-17
+RMAN-08031: released channel: dev_0
+
+Recovery Manager complete.
+[Normal] From: ob2rman@oraas029.grupodavo.davo.com.br "davoprd" Time: 09/03/17 23:54:58
+    Oracle Recovery Manager completed.
+
+[Normal] From: ob2rman@oraas029.grupodavo.davo.com.br "davoprd" Time: 09/03/17 23:54:58
+    Starting backup of Data Protector managed control file backup.
+
+[Warning] From: ob2rman@oraas029.grupodavo.davo.com.br "davoprd" Time: 09/03/17 23:55:06
+    The database reported error while performing requested operation.
+
+ALTER DATABASE BACKUP CONTROLFILE TO '/var/opt/omni/tmp/ctrl_davoprd_22259.dbf' REUSE
+ *
+ ERROR at line 1:
+ ORA-00245: control file backup failed; target is likely on a local file system
+(...)
+
+
+
+Prezado Felipe,
+
+Com base nos dados coletados, podemos afirmar que o backup informado no log, está válido para possível restauração.
+
+
+
+
+
+
+
+
+
+
+Conforme solicitado pelo Sr. Antonio Alves Silva, em contato telefônico em 06/09/2017 às 11:00 através do chamado "7306667 — Recorrências de lock de sessão - DB MAT", iremos ignorar temporariamente os incidentes de locks de sessão até a entrega do próximo relatório das recorrências de lock.
+
+
+
+
+
+
+
+
+
+
+
+
+
+AÇÕES EXECUTADAS (resumo)
+- Ativação de trace no pool de sessões;
+- Acompanhado a execução do processo à fim de identificar a sessão do cliente;
+- Desativação do trace nas sessões do banco de dados;
+- Upload dos traces para analises.
+
+Estamos encaminhando o chamado para equipe responsável pela analise dos traces.
+
+Obs.: Trace encontra-se em anexo.
+
+
+
+AÇÕES EXECUTADAS (resumo)
+- Ativado o trace para a sessão do cliente;
+- Acompanhado a execução do processo;
+- Upload dos traces para analises.
+
+Estamos encaminhando o chamado para equipe responsável pela analise dos traces.
+
+Obs.: Trace encontra-se em anexo.
+
+
+
+
+
+
+Prezado Ricardo Vieira, boa tarde.
+
+Estamos lhe enviando um documento "Praticas_Backup_ORACLE_Pro4tuning.docx" e nele são descritos como a Pro4tuning aborda o tema "Backup de banco de dados" e, esclarece as atribuições Cliente e Pro4tuning. 
+Para prosseguirmos com a configuração do backup físico do banco de dados cdbprd11, precisaremos que você preencha este documento de acordo com as políticas de Backup da Med Imagem.
+Poderiam por favor preencher o documento e caso possua alguma dúvida estou a disposição para esclarece-las.
+
+
+
+
+
+
+
+
+
+Prezado(a) Ricardo Vieira Junior,
+
+Com relação ao incidente ocorrido hoje de madrugada com o servidor medsrvorc01, segue abaixo os resultados de nossa análise e diagnóstico, bem como o resumo das ações técnicas executadas para re-estabelecer o ambiente conforme você acompanhou.
+
+
+1) - SINTOMAS DE ANOMALIA DETECTADOS
+
+1.1 - falhas reportas pelo script de backup da empresa Teiko
+1.2 - interrupção da coleta de dados realizada pelo sistema System Profiler da Pro4Tuning
+1.3 - sistema de arquivos "/" (root) do servidor em estado "somente leitura"
+1.4 - diversos erros apresentados no arquivo /var/log/messages do Linux, similares a:
+
+Sep  7 03:35:17 medsrvorc01 kernel: lost page write due to I/O error on dm-0
+Sep  7 03:35:17 medsrvorc01 kernel: Buffer I/O error on device dm-0, logical block 11016463
+Sep  7 03:35:17 medsrvorc01 kernel: lost page write due to I/O error on dm-0
+Sep  7 03:35:17 medsrvorc01 kernel: Buffer I/O error on device dm-0, logical block 11016464
+Sep  7 03:35:17 medsrvorc01 kernel: lost page write due to I/O error on dm-0
+Sep  7 03:35:17 medsrvorc01 kernel: Buffer I/O error on device dm-0, logical block 11016465
+Sep  7 03:35:17 medsrvorc01 kernel: lost page write due to I/O error on dm-0
+Sep  7 03:35:17 medsrvorc01 kernel: Buffer I/O error on device dm-0, logical block 11016466
+Sep  7 03:35:17 medsrvorc01 kernel: lost page write due to I/O error on dm-0
+Sep  7 03:35:17 medsrvorc01 kernel: Buffer I/O error on device dm-0, logical block 11016467
+
+
+
+2) - CAUSA CONFIRMADA
+
+O sistema de arquivos /OVS localizado no servidor físico do OVM (medovm01) encheu completamente, atingindo 100% do espaço utilizado.
+
+Assim que o espaço se esgotou na máquina física, o arquivo IMG do disco virtual da máquina virtual medsrvorc01 não tinha mais como se expandir. Embora, para o Linux da máquina medsrvorc01 ainda houvesse de 33GB de espaço livre para crescer, este espaço não existia fisicamente.
+
+A falta de espaço fez com que o Linux em medsrvorc01 colocasse a filesystem "/" em modo somente leitura, como uma medida automática de proteção do sistema operacional para evitar danos maiores no sistema de arquivos.
+
+Embora o Oracle tenha ficado no ar dentro do servidor medsrvorc01, o risco de as instâncias Oracle cairem era iminente e sua queda repentina poderia levar também a um eventual reboot do nó 2 do cluster, deixando o TASY totalmente indisponível por alguns minutos.
+
+IMPORTANTE ressaltar que o disco afetado (que encheu) não foi nem o disco da máquina virtual e nem os discos do Oracle ASM (onde o banco de dados reside), motivo pelo qual o banco se manteve no ar mesmo com o servidor degradado.
+
+
+
+3) - AÇÕES IMEDIATAS, EXECUTADAS COM O CLIENTE VIA PLANTÃO
+
+Com a aprovação do sr. Ricardo, executamos o shutdown das instancias Oracle rodando no servidor medsrvorc01 e posteriormente paramos todos os softwares de cluster Oracle no respectivo servidor. Este shutdown controlado foi executado para evitar a queda repentina do Oracle em um horário onde o impacto seria maior para os usuários.
+
+
+
+4) - AÇÕES DE CORREÇÃO DO PROBLEMA
+
+Primeiramente, o Linux do servidor medsrvorc01 foi "recuperado", ou seja, foram executados procedimentos padrão do Linux para encontrar e corrigir inconsistências no sistema de arquivos. Após estes procedimentos o servidor medsrvorc01 entrou no ar, mas o Oracle ainda não foi colocado em funcionamento neste servidor.
+
+O passo seguinte foi executado pelo Ricardo (Medimagem) e consistiu em apagar uma máquina virtual "medsrvweb01" que estava parada e não era mais utilizada. Ao apagar esta máquina, foram liberados cerca de 250GB de espaço no servidor físico, o equivalente a 50% do espaço do repositório OVM.
+
+Com o espaço liberado, foram executados procedimentos para lotar o disco da máquina virtual até o seu limite. Durante este processo, verificamos que o Linux não apresentou nenhum erro de escrita ou leitura, servindo como indicativo de que a máquina virtual estava pronta para voltar a integrar o cluster Oracle.
+
+Na sequência, o Oracle foi recolocado no ar no servidor medsrvorc01 e as conexões do sistema TASY (todas concentradas no nó2) passaram a migrar gradualmente para o nó1. Este processo de redistribuição das conexões ainda está em andamento e provavelmente estará normalizado amanhã, dia 14/09, depois de uma troca grande de turno com usuários saindo e entrando no TASY.
+
+Durante este procedimento, o servidor medsrvorc01 apresentou novamente um atraso de cerca de 6 minutos no relógio. Este atraso está associado com o reboot que foi feito no servidor e fornece uma pista importante para continuarmos investigando este problema com o relógio. Nós tentamos resincronizar os relógios em saltos menores (de 20 a 30 segundos) mas, por volta das 15:28, as instancias Oracle rodando neste nó cairam novamente. Entre a queda e o restart passaram-se cerca de 3 segundos, motivo pelo qual olhando em tela não foi possível detectar inicialmente a queda.
+
+Iremos conduzir este problema relativo ao relógio do Linux e seu impacto no Oracle através de um outro chamado, inclusive com a abertura de um chamado na Oracle para buscar uma solução mais estável.
+
+
+5) - AÇÕES PREVENTIVAS ADICIONAIS
+
+Verificamos o espaço físico do repositório OVS no servidor medovm02 e constatamos que lá havia apenas 4% livre e este servidor estava exposto ao mesmo evento ocorrido com o medovm01. Neste servidor, foi encontrado um backup de uma máquina virtual chamada medsrv01 que o Ricardo não reconheceu como um servidor da Medimagem.
+
+A ação preventiva consistiu em copiar este backup para o servidor 10.1.1.21 na rede. Após a cópia, calculamos o MD5 do backup original e de sua cópia na rede e verificamos que a cópia estava íntegra:
+
+10.1.1.21: 3fdd686f2b26e9bc340312d6b53aa53a
+medovm02: 3fdd686f2b26e9bc340312d6b53aa53a
+
+Constada a integridade, o backup residente no disco do medovm02 foi apagado, liberando assim cerca de 230GB (ou 50% do espaço do repositório). Esta ação mitigou o risco de o servidor medsrvorc02 parar da mesma maneira que o nó 1.
+
+
+6) - RECOMENDAÇÕES ADICIONAIS
+
+Entendemos que é de sua importância para a Medimagem, adotar medidas de monitoramento e gerenciamento das máquinas físicas medovm01 e medovm02 para manter a estabilidade do cluster Oracle.
+
+
+Qualquer dúvida, estamos à disposição.
+
+Atenciosamente,
+
+Anderson
 
 
 

@@ -18,4 +18,4 @@ FROM
 GROUP BY
 	OWNER,TABLESPACE_NAME
 having
-	owner in ('TASY','TASY_VERSAO');
+	owner in ('SE_PRD');
