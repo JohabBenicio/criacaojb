@@ -123,7 +123,7 @@ if x.sql_hash_value > 0 then
     dbms_output.put_line('QUERY TEXT: '||chr(10)||' select sql_fulltext from gv$sql where sql_id=''' || x.sql_id || ''';' || JBQB);
 else
     dbms_output.put_line('LOCK INFORMATION:');
-    dbms_output.put_line('Sessao inativa ha '||x.last_call_et||' segundos.');
+    dbms_output.put_line('Sessao inativa a '||x.last_call_et||' segundos.');
 end if;
 
 if upper(v_hist) = 'S' or upper(v_hist) = 'Y' then

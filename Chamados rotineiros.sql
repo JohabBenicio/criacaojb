@@ -1,5 +1,5 @@
 CHAMADA TELEFÔNICA AO CLIENTE
-Contato telefônico com o cliente em 03/10/2017 11:08, no número (11) 3394-5941.
+Contato telefônico com o cliente em 09/11/2017 16:00, no número (11) 4583-4476.
 
 
 
@@ -2500,7 +2500,7 @@ DBA Oracle
 Prezado cliente,
 
 Com base na confirmação recebida, estamos encerrando o seu chamado.
-Qualquer dúvida ou problema favor abrir um novo chamado.
+Qualquer dúvida ou problema favor prosseguir com a abertura de um novo chamado.
 
 
 Att,
@@ -2595,7 +2595,7 @@ ________________________________________________________________________________
 
 
 
-A abertura desta solicitação ocorreu devido as atividades realizadas no chamado "Ticket#7308103 — Atualização RM 07/09/2017".
+A abertura desta solicitação ocorreu devido as atividades realizadas no chamado "Ticket#7311722 — Acompanhamento para ajustes no horário de verão".
 Ambiente se estabilizou.
 Estamos encaminhando este chamado para o encerramento.
 
@@ -7387,8 +7387,7 @@ Johab Benicio.
 
 
 CONTATO DO DBA
-==============
-Fone : (11) 963-979-426 (Vivo)
+Fone : (11) 989-926-859 (Claro)
 
 DEMANDA PROGRAMADA
 ==================
@@ -7469,8 +7468,7 @@ Johab Benicio.
 
 
 CONTATO DO DBA
-==============
-Fone : (11) 963-979-426 (Vivo)
+Fone : (11) 989-926-859 (Claro)
 
 DEMANDA PROGRAMADA
 ==================
@@ -7560,8 +7558,7 @@ Johab Benício.
 
 
 CONTATO DO DBA
-==============
-Fone : (11) 963-979-426 (Vivo)
+Fone : (11) 989-926-859 (Claro)
 
 DEMANDA PROGRAMADA
 ==================
@@ -8666,8 +8663,7 @@ DBA Oracle.
 
 
 CONTATO DO DBA
-==============
-Fone : (11) 963-979-426 (Vivo)
+Fone : (11) 989-926-859 (Claro)
 
 DEMANDA PROGRAMADA
 ==================
@@ -8799,8 +8795,7 @@ DBA Oracle.
 
 
 CONTATO DO DBA
-==============
-Fone : (11) 963-979-426 (Vivo)
+Fone : (11) 989-926-859 (Claro)
 
 DEMANDA PROGRAMADA
 ==================
@@ -8856,8 +8851,7 @@ DBA Oracle.
 
 
 CONTATO DO DBA
-==============
-Fone : (11) 963-979-426 (Vivo)
+Fone : (11) 989-926-859 (Claro)
 
 DEMANDA PROGRAMADA
 ==================
@@ -9102,14 +9096,13 @@ PLANO DE AÇÃO DO CLIENTE
 
 
 CONTATO DO DBA
-==============
-Fone : (11) 963-979-426 (Vivo)
+Fone : (11) 989-926-859 (Claro)
 
 DEMANDA PROGRAMADA
 ==================
 1) - Escopo Técnico
 
-O Hospital Santa Marcelina, solicita por meio do chamado 50404, a execução do serviço "Realizar o backup via RMAN e Datapump do banco de dados PRDMV".
+O Hospital Santa Marcelina, solicita a execução do serviço "Realizar o backup via RMAN e Datapump do banco de dados PRDMV".
 
 2) - Atividades previstas
 
@@ -9118,10 +9111,11 @@ Passo 1 - Entrar em contato com Sr. Renato para confirmação da realização da
 Passo 2 - Parar o banco de dados PRDMV e deixar exclusivo para realização do backup;
 Passo 3 - Realizar o backup full via RMAN e Datapump;
 Passo 4 - Informar o Sr. Renato sobre a finalização da atividade.
+Passo 5 - Aguardar o retorno do cliente para voltarmos os serviços do banco de dados.
 
 3) - Tempo Estimado e Prazo para a Execução
 
-Estima-se 2 horas para a realização do serviço, tendo como início as 00:00 horas do dia 14/05/2016 e término previsto para as 02:00 horas do dia 14/05/2016.
+Estima-se 2 horas para a realização do serviço, tendo como início às 22:00 horas do dia 13/11/2017.
 
 4) Requisitos
 
@@ -9334,8 +9328,7 @@ DBA Oracle.
 
 
 CONTATO DO DBA
-==============
-Fone : (11) 963-979-426 (Vivo)
+Fone : (11) 989-926-859 (Claro)
 
 DEMANDA PROGRAMADA
 ==================
@@ -10718,8 +10711,7 @@ DBA Oracle
 
 
 CONTATO DO DBA
-==============
-Fone : (11) 963-979-426 (Vivo)
+Fone : (11) 989-926-859 (Claro)
 
 DEMANDA PROGRAMADA
 ==================
@@ -11623,8 +11615,7 @@ Silvio Carvalho
 
 
 CONTATO DO DBA
-==============
-Fone : (11) 963-979-426 (Vivo)
+Fone : (11) 989-926-859 (Claro)
 
 DEMANDA PROGRAMADA
 ==================
@@ -12925,8 +12916,7 @@ DBA Oracle.
 
 
 CONTATO DO DBA
-==============
-Fone : (11) 963-979-426 (Vivo)
+Fone : (11) 989-926-859 (Claro)
 
 DEMANDA PROGRAMADA
 ==================
@@ -19886,8 +19876,7 @@ DBA Oracle
 
 
 CONTATO DO DBA
-==============
-Fone : (11) 963-979-426 (Vivo)
+Fone : (11) 989-926-859 (Claro)
 
 DEMANDA PROGRAMADA
 ==================
@@ -21391,8 +21380,7 @@ DBA Oracle.
 52317 - Refresh GRORAH + DUMP
 
 CONTATO DO DBA
-==============
-Fone : (11) 963-979-426 (Vivo)
+Fone : (11) 989-926-859 (Claro)
 
 DEMANDA PROGRAMADA
 ==================
@@ -22770,7 +22758,7 @@ AÇÕES EXECUTADAS (resumo)
 - Acompanhado a execução do processo;
 - Upload dos traces para analises.
 
-Estamos encaminhando o chamado para equipe responsável pela analise dos traces.
+Estamos encaminhando o chamado para equipe responsável pela analise do trace.
 
 Obs.: Trace encontra-se em anexo.
 
@@ -22875,6 +22863,322 @@ Qualquer dúvida, estamos à disposição.
 Atenciosamente,
 
 Anderson
+
+
+
+AÇÕES EXECUTADAS (resumo)
+- Ativado o trace para a sessão do cliente;
+- Acompanhado a execução do processo;
+- Upload do trace para analise.
+
+Estamos encaminhando o chamado para equipe responsável pela analise do trace.
+
+Obs.: Trace encontra-se em anexo.
+
+
+
+
+
+
+
+Prezado(a) Tadeu Freitas,
+
+RESULTADO DA ANÁLISE
+====================
+
+Avaliamos os traces captados e, podemos lhe afirmar que, com base no conteúdo dos traces não há queries com performance inadequada executada no banco de dados.
+
+O que observamos é que, o tempo de resposta é dispensado de forma expressiva fora da camada do Oracle, ou seja, entre a camada de rede e o servidor de aplicações Jboss.
+
+Esta afirmação pode ser evidenciada nos relatórios anexos, seção 1.1, onde se vê no topo os eventos SQL *Net message from client, que somam cerca de 90% a 95% do tempo de processamento. Este evento é contabilizado pelo Oracle quando a aplicação cliente, no caso o Jboss está ocupada fazendo algo e, o Oracle está esperando (Waiting) que a aplicação lhe envie requisições (Comandos SQL) para executar.
+
+Referência: https://www.toadworld.com/platforms/oracle/w/wiki/914.sql-net-message-from-client
+
+CONCLUSÃO
+===========
+
+Ausência de queries com baixa performance.
+
+PRÓXIMO PASSO
+==============
+
+Com base nos traces obtidos e, ao afirmar que não há queries com baixa performance, sugerimos a você que, caso queira provar tal afirmativa, pode-se isolar a query com o SQL_ID 0fmcyqw7vpqh5, preencher as variáveis bind e executa-la isoladamente a fim de obter seus dados de performance e averiguar o seu tempo de resposta.
+
+A sugestão de execução da query com SQL_ID 0fmcyqw7vpqh5 se dá devido a ser a query com maior tempo de espera no evento SQL *Net message from client (vide seções 3.1 e 3.2 dos relatórios)
+
+
+
+
+
+
+
+
+
+AÇÕES EXECUTADAS (resumo)
+- Ativado o trace para a sessão do cliente;
+- Acompanhado a execução do processo;
+
+Estamos encaminhando o chamado para equipe responsável pela analise do trace.
+
+Obs.: Devido ao tamanho do trace, foi necessário copiar o trace para o gateway "/tmp/centrovias/ticket7311505".
+
+
+
+
+
+
+
+
+
+
+AÇÕES EXECUTADAS (resumo)
+- Ativado o trace na execução da query.
+ * Query levou 23 minultos para ser executada.
+- Acompanhado a execução do processo;
+
+Estamos encaminhando o chamado para equipe responsável pela analise do trace.
+
+Obs.: Devido ao tamanho do trace, foi necessário copiar o trace para o gateway "/tmp/centrovias/ticket7311505".
+
+
+
+
+
+
+
+DADOS COLETADOS
+- Analise do tempo gasto na execução do backup semanal.
+
+<PRINT>
+
+- Status da execução do backup semanal do dia 30/09/2017.
+
+​<PRINT>
+
+
+Com base nos dados coletados, podemos afirmar que o backup foi concluído com sucesso e os próximos backups foram executados no tempo esperado.
+Estamos encaminhando esse chamado para o encerramento.
+
+
+
+DEMANDA PROGRAMADA
+1) Escopo Técnico
+-------------------------
+O Hospital Sirio Libanes, solicita por meio do chamado 55193, a execução do serviço "Atualização da versão do TASY em Homologação (D1B1)".
+
+2) Atividades previstas
+-----------------------------
+Os passos previstos para a execução do (s) serviço (s) são:
+- Baixar o serviço do tasy_homologacao;
+- Parar os jobs de homologação
+- Libera ambiente para atualização
+- Após o ok do Sirio com relação a atualização, a TEOR atualiza o tasy java
+- Volta os serviços e jobs no ar
+
+3) Tempo Estimado e Prazo para a Execução
+------------------------------------------
+Estima-se 01 hora para a realização do serviço, tendo como início as 07 horas do dia 25/10/2017.
+
+4) Requisitos
+--------------------
+Os seguintes requisitos são necessários para a execução do (s) serviço (s) solicitados.
+
+- Manter o ambiente disponível para acesso.
+
+5) Declaração de Aceite e Aprovação
+------------------------------------------------
+Solicitamos que valide o escopo técnico e as atividades previstas,
+bem como autorize a realização dos serviços programados através de uma
+interação neste chamado.
+
+--------------------------------------------------------------------------------------------------------------------------------------
+ATENÇÃO:
+Por tratar-se de um serviço executado fora do horário comercial, o mesmo estará sujeito a eventuais custos adicionais, conforme cláusula do contrato vigente.
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+AÇÕES EXECUTADAS (resumo)
+Analise do estado do manager server MS_11.
+* Nenhuma thread se encontra com estado STUCK.
+
+
+DADOS COLETADOS
+- Estado atual das threads.
+
+<Print Imagem>
+
+
+
+
+
+
+
+
+
+
+
+
+AÇÕES EXECUTADAS (RESUMO)
+- Analise do status do banco de dados;
+- Analise do uptime dos servidores.
+
+DADOS COLETADOS
+- UPTIME do servidor.
+
+oracle@oraas029 /home/oracle [] # w
+  3:13pm  up 103 days, 19:45,  1 user,  load average: 0.08, 0.08, 0.07
+
+MONITORAMENTO
+O chamado abriu devido a perda de comunicação entre o host e servidor de monitoramento por um determinado tempo, entretanto, a mesma foi restabelecida.
+
+A monitoração está Ok.
+
+
+
+
+
+
+
+
+
+
+
+
+
+AÇÕES EXECUTADAS (resumo)
+- Analise dos manager servers com warning;
+ * No inicio de nossa analise, detectamos que as threads em estado STUCK nos manager servers MS_3 e RS_3 voltaram ao estado normal;
+- Iniciamos a analise da thread em estado STUCK no manager server MS_6, e foi detectado que o mesmo estava aguardando um processo à ser concluído na camada da aplicação.
+ * Sr. Ricardo reiniciou o manager server, e as threads voltaram ao estado normal.
+
+CHAMADA TELEFÔNICA AO CLIENTE
+Contato telefônico com o cliente em 30/10/2017 09:40, no número (86) 99405-2930.
+
+- Informamos ao cliente sobre as informações analisadas;
+- Cliente confirmou que realizou o restart do manager server ms_6 para liberar a thread em estado stuck.
+
+Conforme alinhado, estamos encaminhando esse chamado ao encerramento.
+
+​
+
+
+
+
+
+
+
+
+AÇÕES EXECUTADAS (resumo)
+- Analise do estado dos Manager Servers.
+
+Não foi encontrado nenhuma thread no estado STUCK.
+O alerta cessou da ferramenta de monitoramento.
+Estamos encaminhando esse chamado ao encerramento.
+
+
+
+
+
+CONTATO DO DBA
+Fone : (11) 989-926-859 (Claro)
+
+DEMANDA PROGRAMADA
+1) Escopo Técnico
+- A Unimed Jundiaí, solicita a execução do serviço "Acompanhamento da atualização do sistema".
+
+2) Atividades previstas
+Os passos previstos para a execução do (s) serviço (s) são:
+- Parar os jobs da base SOLUS;
+- Parar o serviço da base SOLUS;
+- Aguardar o término da atualização do sistema;
+- Volta os serviços e jobs do banco de dados SOLUS.
+
+3) Tempo Estimado e Prazo para a Execução
+Estima-se 06 horas para a realização do serviço, tendo como início as 10:00 horas do dia 02/10/2017.
+
+4) Requisitos
+Os seguintes requisitos são necessários para a execução do (s) serviço (s) solicitados.
+
+- Manter o ambiente disponível para acesso.
+
+5) Declaração de Aceite e Aprovação
+Solicitamos que valide o escopo técnico e as atividades previstas, bem como autorize a realização dos serviços programados através de uma interação neste chamado.
+
+--------------------------------------------------------------------------------------------------------------------------------------
+ATENÇÃO:
+Por tratar-se de um serviço executado fora do horário comercial, o mesmo estará sujeito a eventuais custos adicionais, conforme cláusula do contrato vigente.
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+CONTATO DO DBA
+Fone : (11) 989-926-859 (Claro)
+
+DEMANDA PROGRAMADA
+1) Escopo Técnico
+- A Unimed Jundiaí, solicita a execução do serviço "Acompanhamento da atualização do sistema Tasy".
+
+2) Atividades previstas
+Os passos previstos para a execução do (s) serviço (s) são:
+- Encerrar as sessões de todos usuários que conectar no banco de dados;
+- Acompanhar a atualização do sistema Tasy e reportar ao cliente caso haja novas sessões ou processos que possam concorrer com a atualização.
+
+3) Tempo Estimado e Prazo para a Execução
+Estima-se 4 horas para a realização do serviço, tendo como início as 23:00 horas do dia 07/11/2017.
+
+4) Requisitos
+Os seguintes requisitos são necessários para a execução do (s) serviço (s) solicitados.
+
+- Manter o ambiente disponível para acesso.
+
+5) Declaração de Aceite e Aprovação
+Solicitamos que valide o escopo técnico e as atividades previstas, bem como autorize a realização dos serviços programados através de uma interação neste chamado.
+
+--------------------------------------------------------------------------------------------------------------------------------------
+ATENÇÃO:
+Por tratar-se de um serviço executado fora do horário comercial, o mesmo estará sujeito a eventuais custos adicionais, conforme cláusula do contrato vigente.
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+AÇÒES EXECUTADAS (resumo)
+- Analise do estado das threads no manager server MS_1;
+ * Foi detectado através do dump thread que a mesma havia aberto uma sessão no banco de dados (JDBC).
+- Foi realizado uma analise nas sessões do banco de dados.
+ * Identificamos uma sessão no banco de dados ativo à mais de uma hora.
+- Informamos ao cliente sobre a sessão no banco de dados e o mesmo solicitou que encerrasse-mos a sessão.
+ * Dados da sessão: User=ELZIRENEA Machine=HSPPST1204
+
+Após o encerramento da sessão, a thread voltou ao estado normal.
+Estamos encaminhando esse chamado ao encerramento.
+
+
+
+
+
+
+Prezado Ricardo,
+
+Iremos realizar um estudo no ambiente, e daremos um novo posicionamento nos próximos dias.
+Qualquer dúvida, estamos a disposição.
+
 
 
 

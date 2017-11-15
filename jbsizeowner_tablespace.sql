@@ -18,4 +18,5 @@ FROM
 GROUP BY
 	OWNER,TABLESPACE_NAME
 having
-	owner in ('SE_PRD');
+	TABLESPACE_NAME = 'LMS_TS'
+order by 1;

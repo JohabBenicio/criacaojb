@@ -21,7 +21,7 @@ imp \'sys/oracle12c@TESTE_PDB as sysdba\' file=usr_monit_p4t_lock.dmp fromuser=u
 
 imp \'/ as sysdba\' file=usr_monit_p4t_lock.dmp fromuser=usr_monit_p4t
 
-'
+
 -- Apagar todos objetos criados
 
 SELECT 'DROP '||DECODE (OBJECT_TYPE,'SYNONYM','PUBLIC SYNONYM',OBJECT_TYPE)  ||' '||DECODE(OWNER,'PUBLIC',NULL,OWNER||'.')||OBJECT_NAME||DECODE (OBJECT_TYPE,'TABLE',' cascade constraints;',';') COMANDO
@@ -67,8 +67,14 @@ USR_MONIT_P4T
 -- Criar as tabelas para armazenar os dados coletados.
 
 drop table usr_monit_p4t.tb_lock_snap cascade constraints;
-create table usr_monit_p4t.tb_lock_snap (MNLC_ID NUMBER, MNLC_VDATA VARCHAR2(21)) tablespace tbs_monit_p4t;
+
+create table usr_monit_p4t.tb_lock_snap (
+  MNLC_ID NUMBER,
+  MNLC_VDATA VARCHAR2(21)
+) tablespace tbs_monit_p4t;
+
 alter table usr_monit_p4t.tb_lock_snap add constraint pk_tb_lock_snap primary key (mnlc_id);
+
 
 -- Criar a sequencia
 create sequence usr_monit_p4t.seq_lock_snap minvalue 1 maxvalue 99999999 start with 1 increment by 1 nocache cycle;
@@ -79,23 +85,24 @@ create sequence usr_monit_p4t.seq_lock_snap minvalue 1 maxvalue 99999999 start w
 
 drop table usr_monit_p4t.tb_monit_blocker;
 create table usr_monit_p4t.tb_monit_blocker (
-    MNLC_ID NUMBER,
-    MNBLR_ID NUMBER,
-    MNBLR_INST_ID NUMBER,
-    MNBLR_SID NUMBER,
-    MNBLR_SERIAL NUMBER,
-    MNBLR_STATUS VARCHAR2(10),
-    MNBLR_LAST_CALL_ET NUMBER,
-    MNBLR_USERNAME VARCHAR2(30),
-    MNBLR_OSUSER VARCHAR2(30),
-    MNBLR_MACHINE VARCHAR2(64),
-    MNBLR_PROGRAM VARCHAR2(48),
-    MNBLR_MODULE VARCHAR2(64),
-    MNBLR_SQL_ATUAL VARCHAR2(64),
-    MNBLR_SQLID_HISTORY VARCHAR2(4000)
+  MNLC_ID NUMBER,
+  MNBLR_ID NUMBER,
+  MNBLR_INST_ID NUMBER,
+  MNBLR_SID NUMBER,
+  MNBLR_SERIAL NUMBER,
+  MNBLR_STATUS VARCHAR2(10),
+  MNBLR_LAST_CALL_ET NUMBER,
+  MNBLR_USERNAME VARCHAR2(30),
+  MNBLR_OSUSER VARCHAR2(30),
+  MNBLR_MACHINE VARCHAR2(64),
+  MNBLR_PROGRAM VARCHAR2(48),
+  MNBLR_MODULE VARCHAR2(64),
+  MNBLR_SQL_ATUAL VARCHAR2(64),
+  MNBLR_SQLID_HISTORY VARCHAR2(4000)
 ) tablespace tbs_monit_p4t;
 
 alter table usr_monit_p4t.tb_monit_blocker add  constraint pk_monit_blocker primary key (MNBLR_ID);
+
 alter table usr_monit_p4t.tb_monit_blocker add  constraint fk_snap_blocker
   foreign key (MNLC_ID) references usr_monit_p4t.tb_lock_snap (MNLC_ID);
 
@@ -108,30 +115,30 @@ create sequence usr_monit_p4t.seq_monit_blocker minvalue 1 maxvalue 99999999 sta
 
 drop table usr_monit_p4t.tb_monit_blocked;
 create table usr_monit_p4t.tb_monit_blocked (
-    MNLC_ID NUMBER,
-    MNBLR_ID NUMBER,
-    MNBLD_ID NUMBER,
-    MNBLD_INST_ID NUMBER,
-    MNBLD_SID NUMBER,
-    MNBLD_SERIAL NUMBER,
-    MNBLD_STATUS VARCHAR2(10),
-    MNBLD_LAST_CALL_ET NUMBER,
-    MNBLD_USERNAME VARCHAR2(30),
-    MNBLD_OSUSER VARCHAR2(30),
-    MNBLD_TIME_LOCK number,
-    MNBLD_MACHINE VARCHAR2(64),
-    MNBLD_PROGRAM VARCHAR2(48),
-    MNBLD_MODULE VARCHAR2(64),
-    MNBLD_SQLID VARCHAR2(13)
+  MNLC_ID NUMBER,
+  MNBLR_ID NUMBER,
+  MNBLD_ID NUMBER,
+  MNBLD_INST_ID NUMBER,
+  MNBLD_SID NUMBER,
+  MNBLD_SERIAL NUMBER,
+  MNBLD_STATUS VARCHAR2(10),
+  MNBLD_LAST_CALL_ET NUMBER,
+  MNBLD_USERNAME VARCHAR2(30),
+  MNBLD_OSUSER VARCHAR2(30),
+  MNBLD_TIME_LOCK number,
+  MNBLD_MACHINE VARCHAR2(64),
+  MNBLD_PROGRAM VARCHAR2(48),
+  MNBLD_MODULE VARCHAR2(64),
+  MNBLD_SQLID VARCHAR2(13)
 ) tablespace tbs_monit_p4t;
 
 alter table usr_monit_p4t.tb_monit_blocked add  constraint pk_monit_blocked primary key (MNBLD_ID);
 
 alter table usr_monit_p4t.tb_monit_blocked add  constraint fk_snap_blocked
   foreign key (MNLC_ID) references usr_monit_p4t.tb_lock_snap (MNLC_ID);
+
 alter table usr_monit_p4t.tb_monit_blocked add  constraint fk_blocked_blocker
   foreign key (MNBLR_ID) references usr_monit_p4t.tb_monit_blocker (MNBLR_ID);
-
 
 drop sequence usr_monit_p4t.seq_monit_blocked;
 create sequence usr_monit_p4t.seq_monit_blocked minvalue 1 maxvalue 99999999 start with 1 increment by 1 nocache cycle;
@@ -142,11 +149,11 @@ create sequence usr_monit_p4t.seq_monit_blocked minvalue 1 maxvalue 99999999 sta
 
 drop table usr_monit_p4t.tb_monit_lock_table;
 create table usr_monit_p4t.tb_monit_lock_table (
-    MNLC_ID NUMBER,
-    MNBLR_ID NUMBER,
-    MNLCTB_OWNER_OBJ varchar2(30),
-    MNLCTB_OBJECT_NAME varchar2(128),
-    MNLCTB_TYPE_LOCK varchar2(20)
+  MNLC_ID NUMBER,
+  MNBLR_ID NUMBER,
+  MNLCTB_OWNER_OBJ varchar2(30),
+  MNLCTB_OBJECT_NAME varchar2(128),
+  MNLCTB_TYPE_LOCK varchar2(20)
 ) tablespace tbs_monit_p4t;
 
 alter table usr_monit_p4t.tb_monit_lock_table add  constraint fk_blocked_lock_table
@@ -157,11 +164,9 @@ alter table usr_monit_p4t.tb_monit_lock_table add  constraint fk_blocked_lock_ta
 
 drop table usr_monit_p4t.tb_monit_query;
 create table usr_monit_p4t.tb_monit_query (
-    MNQR_SQLID varchar2(13),
-    MNQR_FULLTEXT varchar2(4000)
+  MNQR_SQLID varchar2(13),
+  MNQR_FULLTEXT varchar2(4000)
 ) tablespace tbs_monit_p4t;
-
-
 
 
 
@@ -288,7 +293,7 @@ for loop1 in (
           end loop;
         end loop;
 
-        -- Inserir os dados do bloqueador.
+        -- Inserir os dados do BLOQUEADOR.
 
         insert into usr_monit_p4t.tb_monit_blocker
           ( MNLC_ID
@@ -325,7 +330,7 @@ for loop1 in (
         commit;
 
 
-        -- Inserir os dados das tabelas bloqueadas.
+        -- Inserir os dados das TABELAS bloqueadas.
 
         for tab in
         (
@@ -365,93 +370,137 @@ for loop1 in (
 
     end loop;
 
-    -- Coletar os dados dos usuarios bloqueados.
+    -- Coletar os dados dos USUARIOS BLOQUEADOS.
 
-        for loop2 in (
-            select l2.sid,
-                   l2.inst_id,
-                   l2.ctime
-            from gv$lock l1, gv$lock l2
-            where l1.block>0
-              and l2.block=0
-              and l2.id1=loop1.id1
-              and l2.id2=loop1.id2
-              and l1.sid=loop1.sid
-            order by 3 asc
-        ) loop
-            for blocked in (
-                select sid,
-                       serial#,
-                       status,
-                       last_call_et,
-                       username,
-                       osuser,
-                       machine,
-                       program,
-                       module,
-                       sql_id
-                from gv$session
-                where sid=loop2.sid
-                  and inst_id=loop2.inst_id
-                  and username is not null
-            ) loop
+    for loop2 in (
+      select l2.sid,
+             l2.inst_id,
+             l2.ctime
+      from gv$lock l1, gv$lock l2
+      where l1.block>0
+        and l2.block=0
+        and l2.id1=loop1.id1
+        and l2.id2=loop1.id2
+        and l1.sid=loop1.sid
+      order by 3 asc
+    ) loop
+      for blocked in (
+        select sid,
+               serial#,
+               status,
+               last_call_et,
+               username,
+               osuser,
+               machine,
+               program,
+               module,
+               sql_id
+        from gv$session
+        where sid=loop2.sid
+          and inst_id=loop2.inst_id
+          and username is not null
+      ) loop
 
         select seq_monit_blocked.nextval into ID_BLOCKED from dual;
 
         insert into usr_monit_p4t.tb_monit_blocked
-          ( MNLC_ID
-           ,MNBLR_ID
-           ,MNBLD_ID
-           ,MNBLD_INST_ID
-           ,MNBLD_SID
-           ,MNBLD_SERIAL
-           ,MNBLD_STATUS
-           ,MNBLD_LAST_CALL_ET
-           ,MNBLD_USERNAME
-           ,MNBLD_OSUSER
-           ,MNBLD_TIME_LOCK
-           ,MNBLD_MACHINE
-           ,MNBLD_PROGRAM
-           ,MNBLD_MODULE
-           ,MNBLD_SQLID
-          )
+        (  MNLC_ID
+          ,MNBLR_ID
+          ,MNBLD_ID
+          ,MNBLD_INST_ID
+          ,MNBLD_SID
+          ,MNBLD_SERIAL
+          ,MNBLD_STATUS
+          ,MNBLD_LAST_CALL_ET
+          ,MNBLD_USERNAME
+          ,MNBLD_OSUSER
+          ,MNBLD_TIME_LOCK
+          ,MNBLD_MACHINE
+          ,MNBLD_PROGRAM
+          ,MNBLD_MODULE
+          ,MNBLD_SQLID
+        )
         values
-          ( ID_SNAP,
-            ID_BLOCKER,
-            ID_BLOCKED,
-            loop2.inst_id,
-            blocked.sid,
-            blocked.serial#,
-            blocked.status,
-            blocked.last_call_et,
-            blocked.username,
-            blocked.osuser,
-            loop2.ctime,
-            blocked.machine,
-            blocked.program,
-            blocked.module,
-            blocked.sql_id
-          );
+        ( ID_SNAP,
+          ID_BLOCKER,
+          ID_BLOCKED,
+          loop2.inst_id,
+          blocked.sid,
+          blocked.serial#,
+          blocked.status,
+          blocked.last_call_et,
+          blocked.username,
+          blocked.osuser,
+          loop2.ctime,
+          blocked.machine,
+          blocked.program,
+          blocked.module,
+          blocked.sql_id
+        );
 
-          select count(MNQR_SQLID) into V_COUNT from usr_monit_p4t.tb_monit_query where MNQR_SQLID=blocked.sql_id;
+        select count(MNQR_SQLID) into V_COUNT from usr_monit_p4t.tb_monit_query where MNQR_SQLID=blocked.sql_id;
 
-            if V_COUNT = 0 then
-              insert into usr_monit_p4t.tb_monit_query
-                (
-                  MNQR_SQLID,
-                  MNQR_FULLTEXT
-                ) select sql_id,sql_fulltext from gv$sql where sql_id=blocked.sql_id;
-              commit;
-            end if;
+        if V_COUNT = 0 then
+          insert into usr_monit_p4t.tb_monit_query
+            (
+              MNQR_SQLID,
+              MNQR_FULLTEXT
+            ) select sql_id,sql_fulltext from gv$sql where sql_id=blocked.sql_id;
           commit;
+        end if;
+
+        commit;
       end loop;
     end loop;
+
+  elsif loop1.ctime >= TMP_SEG_LOCK and V_VALID_INSERT > 0 then
+
+    -- Atualiza o TEMPO DE LOCK das sessoes bloqueadas
+
+    for upd_b in (
+      select b1.MNLC_ID, b1.MNBLR_ID, b1.MNBLR_SID, b1.MNBLR_SERIAL, b1.MNBLR_INST_ID
+      into V_VALID_INSERT
+      from usr_monit_p4t.tb_lock_snap snp, usr_monit_p4t.tb_monit_blocker b1
+      where b1.MNBLR_SID                    = loop1.sid
+        and b1.MNBLR_INST_ID                = loop1.inst_id
+        and to_char(sysdate,'yyyymmddhh24') = to_char(to_date(snp.MNLC_VDATA,'dd/mm/yyyy hh24:mi:ss'),'yyyymmddhh24')
+    ) loop
+
+      for loop2 in (
+        select l2.sid,
+               l2.inst_id,
+               l2.ctime,
+               b.MNBLD_ID
+        from gv$lock l1, gv$lock l2, gv$session s, usr_monit_p4t.tb_monit_blocked b
+        where l1.block>0
+          and l2.block=0
+          and l2.id1=loop1.id1
+          and l2.id2=loop1.id2
+          and l1.sid=loop1.sid
+          and s.sid=l2.sid
+          and s.inst_id=l2.inst_id
+          and upd_b.MNBLR_INST_ID=L1.INST_ID
+          and upd_b.MNBLR_SID=L1.SID
+          and b.MNBLD_SID=s.sid
+          and b.MNBLD_SERIAL=s.serial#
+          and b.MNBLD_INST_ID=s.inst_id
+        order by 3 asc
+      ) loop
+
+        update usr_monit_p4t.tb_monit_blocked set MNBLD_TIME_LOCK=loop2.ctime where MNBLD_ID=loop2.MNBLD_ID;
+        commit;
+
+      end loop;
+    end loop;
+
   end if;
+
 end loop;
 
 
-
 -- Purge do histórico.
+
+
 
 
 end;

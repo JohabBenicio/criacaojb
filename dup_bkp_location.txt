@@ -1,7 +1,9 @@
- nohup rman auxiliary / cmdfile xpto.rcv msglog xpto.log &
+ nohup rman auxiliary / cmdfile /tmp/duplicate_tasy.rcv msglog /tmp/duplicate_tasy.log &
 
- 
-################# arquivo xpto.rcv
+
+################# arquivo /tmp/duplicate_tasy.rcv
+
+cat <<EOF>/tmp/duplicate_tasy.rcv
 run
 {
 allocate auxiliary channel C1 device type disk;
@@ -12,7 +14,12 @@ allocate auxiliary channel C5 device type disk;
 allocate auxiliary channel C6 device type disk;
 set newname for database to '+DGHOMO';
 SET UNTIL TIME "TO_DATE('14-03-2017 02:00:00','dd-mm-yyyy hh24:mi:ss')";
-duplicate database to homolog
-backup location '/u03/backup/erpm/fisico';
+duplicate database to tasy
+backup location '/u02/backup/tasy/fisico/diario';
 }
+exit;
+EOF
+
+
+
 

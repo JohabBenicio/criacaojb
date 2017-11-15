@@ -8,9 +8,9 @@ i
 clear
 unset CHAMADO
 DIR_LOC=$(basename $PWD)
-VALID=$(echo $DIR_LOC | grep "cst\|chamado" | wc -l)
+VALID=$(echo $DIR_LOC | grep "cst\|chamado\|icket_" | wc -l)
 if [ "$VALID" -gt "0" ]; then
-CHAMADO=${DIR_LOC#*cst};CHAMADO=${CHAMADO#*chamado}
+CHAMADO=${DIR_LOC#*cst};CHAMADO=${CHAMADO#*chamado};CHAMADO=${CHAMADO#*icket_}
 else
 CHAMADO=0
 fi

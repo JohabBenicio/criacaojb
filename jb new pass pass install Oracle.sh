@@ -197,6 +197,10 @@ export THREADS_FLAG="native"
 export PATH="$ORACLE_GRID_HOME/bin:$ORACLE_HOME/bin:$ORACLE_HOME/OPatch:$ORACLE_BASE/admin/otlp/scripts:/sbin:$PATH:/usr/X11R6/lib64:/usr/X11R6/bin:."
 export SQLPATH="$ORACLE_BASE/admin/scripts/sql"
 export PS1="[\u@\h [\$ORACLE_SID] \W]\\$ "
+
+# export PS1="[\[\033[01;31m\]\u\[\033[01;33m\]@\[\033[01;36m\]\h [\$ORACLE_SID] \[\033[01;33m\]\W\[\033[00m\]]\$ "
+
+
 umask 022
 
 alias home="cd $ORACLE_HOME"
@@ -284,5 +288,5 @@ crsctl status resource -t
 
 $ORACLE_GRID_HOME/OPatch/opatch lsinventory -detail -oh $ORACLE_GRID_HOME | grep -i "Patch description\|OUI version\|OPatch version\|Oracle Home"
 
-$ORACLE_GRID_HOME/OPatch/opatch lsinventory -oh $ORACLE_GRID_HOME 
+$ORACLE_GRID_HOME/OPatch/opatch lsinventory -oh $ORACLE_GRID_HOME
 

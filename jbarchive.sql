@@ -19,7 +19,7 @@ select
 from
 	v$archived_log
 where
-	to_char(completion_time,'dd/mm/yyyy') between '01/01/2016' and to_char(to_date(sysdate), 'dd/mm/yyyy')
+	to_char(completion_time,'dd/mm/yyyy') between '07/10/2016' and to_char(to_date(sysdate), 'dd/mm/yyyy')
 group by
 	to_char(completion_time,'dd/mm/yyyy'),to_char(completion_time,'mm')
 	order by 1;
@@ -44,8 +44,8 @@ select
 from
 	v$archived_log
 where
-	--to_char(completion_time,'dd/mm/yyyy') = ('22/02/2017')
-	to_char(completion_time,'yyyymmdd') >= to_char(sysdate-5,'yyyymmdd')
+	--to_char(completion_time,'dd/mm/yyyy') = ('07/10/2017')
+	to_char(completion_time,'yyyymmdd') >= to_char(sysdate-1,'yyyymmdd')
 order by 1;
 
 

@@ -1,7 +1,7 @@
 DADOS COLETADOS
 - Locks atuais.
 
-SYS@mat12 > select l2.ctime from gv$lock l1, gv$lock l2 where l1.block>0 and l2.block=0 and l1.id1=l2.id1 and l1.id2=l2.id2;
+SQL> select l2.ctime from gv$lock l1, gv$lock l2 where l1.block>0 and l2.block=0 and l1.id1=l2.id1 and l1.id2=l2.id2;
 
 no rows selected
 
@@ -81,12 +81,12 @@ fabio.nobre@censo-nso.com.br
 
 
 Assunto:
-Lock de sessão - DB VSBLSPT.
+Lock de sessão - DB P1B1.
 
 
 Prezado Cliente,
 
-Foi identificado um lock de sessão no banco de dados VSBLSPT.
+Foi identificado um lock de sessão no banco de dados P1B1.
 Segue abaixo os dados coletados referente ao lock.
 
 
@@ -106,7 +106,7 @@ Carlos Cristiano
 Fabio Nobre
 
 CHAMADA TELEFÔNICA AO CLIENTE
-Contato telefônico com cliente em 05/10/2017 11:10, no número 11 3618-5164.
+Contato telefônico com cliente em 05/11/2017 11:10, no número 11 3618-5164.
 
 - Conforme solicitado, foi encerrado a sessão do usuário bloqueador.
 
@@ -134,7 +134,7 @@ Aguardamos vossas considerações.
 
 
 CHAMADA TELEFÔNICA AO CLIENTE
-Contato telefônico com cliente em 05/10/2017 11:10, no número 11 3618-5164.
+Contato telefônico com cliente em 05/11/2017 11:10, no número 11 3618-5164.
 
 Conforme alinhado, aguardaremos o retorno do cliente, para darmos continuidade no atendimento do chamado.
 

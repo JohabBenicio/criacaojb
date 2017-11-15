@@ -25,11 +25,11 @@ valid varchar2(9);
 
 	cursor c1 is
       select s.sid,s.serial#,s.program,s.machine,s.osuser,s.username,s.status,l2.ctime from v\$session s, v\$lock l1, v\$lock l2
-      where s.username is not null 
-      and s.username not in ('SYS','SYSTEM') 
-      and s.type='USER' 
-      and s.status = 'INACTIVE' 
-      and s.sid=l1.sid 
+      where s.username is not null
+      and s.username not in ('SYS','SYSTEM')
+      and s.type='USER'
+      and s.status = 'INACTIVE'
+      and s.sid=l1.sid
       and l1.block>0
       and l1.id1=l2.id1
       and l1.id2=l2.id2
@@ -39,11 +39,11 @@ valid varchar2(9);
 begin
 
 select count(*) into valid from v\$session s, v\$lock l1, v\$lock l2
-      where s.username is not null 
-      and s.username not in ('SYS','SYSTEM') 
-      and s.type='USER' 
-      and s.status = 'INACTIVE' 
-      and s.sid=l1.sid 
+      where s.username is not null
+      and s.username not in ('SYS','SYSTEM')
+      and s.type='USER'
+      and s.status = 'INACTIVE'
+      and s.sid=l1.sid
       and l1.block>0
       and l1.id1=l2.id1
       and l1.id2=l2.id2
@@ -53,19 +53,21 @@ select count(*) into valid from v\$session s, v\$lock l1, v\$lock l2
     if valid = 0 then
     	dbms_output.put_line(1);
     else
-	select to_char(sysdate,'dd/mm/yyyy hh24:mi:ss') into vdata from dual;
-	dbms_output.put_line(' HORARIO DA ANALISE: '||vdata||chr(10));
-	for x in c1 loop
-	   	dbms_output.put_line(' OWNER S.O:............ '||lower(x.osuser));
-	   	dbms_output.put_line(' MACHINE:.............. '||lower(x.machine));
-	   	dbms_output.put_line(' OWNER DB:............. '||lower(x.username));
-	   	dbms_output.put_line(' STATUS OWNER DB:...... '||lower(x.status));
-	   	dbms_output.put_line(' PROGRAM USADO:........ '||lower(x.program));
-	   	dbms_output.put_line(' TEMPO DE LOCK:........ '||lower(x.ctime) || ' segundos'||chr(10)||chr(10));
-	   	if KILL = 'Y' then
-		    execute immediate 'alter system kill session '''||x.sid||','||x.serial#||''' immediate';
-		end if;
-   end loop;
+	    select to_char(sysdate,'dd/mm/yyyy hh24:mi:ss') into vdata from dual;
+	    dbms_output.put_line(' HORARIO DA ANALISE: '||vdata||chr(10));
+
+
+	    for x in c1 loop
+	       	dbms_output.put_line(' OWNER S.O:............ '||lower(x.osuser));
+	       	dbms_output.put_line(' MACHINE:.............. '||lower(x.machine));
+	       	dbms_output.put_line(' OWNER DB:............. '||lower(x.username));
+	       	dbms_output.put_line(' STATUS OWNER DB:...... '||lower(x.status));
+	       	dbms_output.put_line(' PROGRAM USADO:........ '||lower(x.program));
+	       	dbms_output.put_line(' TEMPO DE LOCK:........ '||lower(x.ctime) || ' segundos'||chr(10)||chr(10));
+	       	if KILL = 'Y' then
+	    	    execute immediate 'alter system kill session '''||x.sid||','||x.serial#||''' immediate';
+	    	end if;
+        end loop;
    end if;
 EXCEPTION
   WHEN OTHERS THEN

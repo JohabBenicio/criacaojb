@@ -105,13 +105,13 @@ create public synonym seq_traceflag_jb for seq_traceflag_jb;
 
 select distinct  privilege from dba_sys_privs where grantee='PUBLIC';
 
-select distinct  privilege from dba_sys_privs where grantee='SOLUS';
+select distinct  privilege from dba_sys_privs where grantee='CORRWIN';
 
 
 -- Caso não tenha a grant "alter session", então conceda para role PUBLI, mas não esqueça de revogar a mesma.
-grant alter session to MERCURY;
+grant alter session to CORRWIN;
 
-revoke alter session from MERCURY;
+revoke alter session from CORRWIN;
 
 
 -- ##############################################################################################################################
@@ -119,7 +119,7 @@ revoke alter session from MERCURY;
 -- ##############################################################################################################################
 
 
-create or replace trigger trg_logon_10046_jb after logon on database
+create or replace trigger sys.trg_logon_10046_jb after logon on database
 declare
   v_count varchar2(9);
   v_identifier varchar2(64):=upper(sys_context('userenv', 'session_user')) || '_' || trim(to_char(sysdate, 'yyyymmddhh24miss'));
@@ -167,7 +167,6 @@ for x in (select * from traceflag_jb where flag=1 and campo is not null) loop
       execute immediate v_query into v_count,v_id_trace;
     exception
       when others then
-        --RAISE_APPLICATION_ERROR(-20001,'Comando executado: '||v_query,true);
         null;
     end;
 
@@ -482,15 +481,27 @@ commit;
 
 
 
-
+tkprof <NOME_ARQUIVO.TRC> <NOME_ARQUIVO_DESTINO.TXT> EXPLAIN=<USER/PASSWORD@TNS> WAITS=YES SYS=YES SORT=EXEELA,FCHELA,EXECPU
 
 -- ##############################################################################################################################
 -- ## Passo 7: Query para ajudar na identificação do usuario.
 -- ##############################################################################################################################
 
-TASY             HSL\M5118          macsilva           M5118          Tasy.exe
 
-define campo=RODRIGO
+65
+
+COINVMFL65
+maysa
+
+define campo=MAYSAMONTEIRO
+
+set lines 300 pages 999
+col program for a60
+col machine for a30
+select distinct username,machine,osuser,terminal,program,status,client_info from gv$session
+where upper(username) like '%&&campo%' or upper(osuser) like upper('%&&campo%') or upper(terminal) like '%&&campo%';
+
+
 
 select distinct sid,serial#,username,machine,osuser,terminal,program,status,client_info from gv$session
 where upper(username) like '%&&campo%' or upper(osuser) like upper('%&&campo%') or upper(terminal) like '%&&campo%';
@@ -499,7 +510,7 @@ where upper(username) like '%&&campo%' or upper(osuser) like upper('%&&campo%') 
 set lines 300 pages 999
 col program for a60
 col machine for a30
-select distinct username,machine,osuser,terminal,program from gv$session where username is not null order by 1;
+select distinct username,machine,osuser,terminal,client_info from gv$session where username is not null order by 1;
 
 
 set lines 200 pages 999
@@ -510,12 +521,22 @@ select distinct username,machine,osuser,terminal,program from gv$session where u
 
 
 -- #####################################
+CORRWIN              COIN\COINVMFL65           maysamonteiro                  COINVMFL65            1122       8049 ACTIVE            2 ACTIVE   00:00:08      15t014z0t
 
-define campo=SOLUS
+
+         2          1       1122       8049 TRIGGER    23/10/2017 17:25:18  ON         /u01/app/oracle/diag/rdbms/coin/coin2/trace/coin2_ora_11265*.trc
+
+tkprof /tmp/coin2_ora_11265_P4T_CORRWIN_20171023172518.trc /tmp/coin2_ora_11265_P4T_CORRWIN_20171023172518.txt EXPLAIN=\'/ as sysdba \' WAITS=YES SYS=YES SORT=EXEELA,FCHELA,EXECPU
+
+tkprof /tmp/coin2_ora_11265_P4T_CORRWIN_20171023172518.trc /tmp/coin2_ora_11265_P4T_CORRWIN_20171023172518_02.txt WAITS=YES SORT=FCHELA
+
+
+
+define campo=M4479
 
 col logon_time for a20
-col machine for a30
-col username for a30
+col machine for a25
+col username for a20
 col osuser for a30
 col terminal for a15
 col kill_session for a55
@@ -523,37 +544,26 @@ col tracefile for a100
 col program for a30
 col spid for 99999
 set lines 300 pages 300
-select distinct s.username,s.machine,s.osuser,s.terminal,s.sid,s.serial#,s.inst_id,s.status,s.sql_id,s.client_info--,s.program
+select distinct
+    s.username
+  , s.machine
+  , s.osuser
+  , s.terminal
+  , s.sid
+  , s.serial#
+  , s.status
+  , s.inst_id
+  , s.status
+  , to_char(trunc(s.last_call_et/3600),'FM9900') || ':' ||
+      to_char(trunc(mod(s.last_call_et,3600)/60),'FM00') || ':' ||
+      to_char(mod(s.last_call_et,60),'FM00') LAST_CALL_ET
+  , s.sql_id
+  , s.client_info
+  --, s.program
 from gv$session s, gv$process p
 where (upper(s.osuser)=upper('&&campo') or upper(s.username)=upper('&&campo') or upper(s.terminal)=upper('&&campo') or upper(machine)=upper('&&campo'))
 and p.addr = s.paddr
-and s.status='ACTIVE'
-order by s.sid;
-
-
-####### Ativar com base nas sessoes ativadas na tabela/
-
-
-col logon_time for a20
-col machine for a30
-col username for a20
-col osuser for a20
-col terminal for a15
-col kill_session for a55
-col tracefile for a100
-col program for a30
-col spid for 99999
-set lines 300 pages 300
-select distinct s.username,s.machine,s.osuser,s.terminal,s.sid,s.serial#,s.inst_id,s.status,s.sql_id,s.program
-from gv$session s, gv$process p
-where (
-    upper(s.username) in (select username from traceflag_jb where FLAG=1)
- or upper(s.osuser) in (select osuser from traceflag_jb where FLAG=1)
- or upper(s.terminal) in (select terminal from traceflag_jb where FLAG=1)
- or upper(s.machine) in (select host from traceflag_jb where FLAG=1)
- or upper(s.program) in (select program from traceflag_jb where FLAG=1)
- ) -- and s.status='ACTIVE'
-and p.addr = s.paddr
+--and s.status='ACTIVE'
 order by s.sid;
 
 
@@ -565,13 +575,13 @@ order by s.sid;
 -- ##############################################################################################################################
 
 
-exec prc_logon_10046_jb(username_in => 'SOLUS', -
-host_in => '*', -
-osuser_in => '*', -
-terminal_in => '*', -
+exec prc_logon_10046_jb(username_in => 'TASY', -
+host_in => 'HSL\M4479', -
+osuser_in => 'jagsilva', -
+terminal_in => 'M4479', -
 program_in => '*', -
 active_in => 'Y', -
-currents_in => 'Y');
+currents_in => 'N');
 
 
 
@@ -594,7 +604,7 @@ select * from traceflag_jb;
 select * from tracehistory_jb order by 6;
 
 
-update traceflag_jb set flag=0;
+
 
 
 select * from tracehistory_jb order by 1,7;
@@ -603,6 +613,24 @@ select * from tracehistory_jb order by 1,7;
 
 update traceflag_jb set FLAG=0;
 commit;
+
+
+
+
+set lines 200
+col OSUSER for a30
+col TERMINAL for a30
+col USERNAME for a30
+col HOST for a30
+col module for a20
+col detalhes for a76
+col program for a10
+set pages 9999
+select * from tracehistory_jb where  status='ON' order by 6;
+
+
+select * from tracehistory_jb where sid=550;
+
 
 
 -- ##############################################################################################################################
@@ -626,6 +654,11 @@ exec prc_dis_trc_10046_jb (id_trace_in => 1, action_in => 'ACTIVE_TRACE');
 
 
 
+
+
+USERNAME             MACHINE                   OSUSER                         TERMINAL               SID    SERIAL# STATUS      INST_ID STATUS   LAST_CALL_ET  SQL_ID        CLIENT_
+-------------------- ------------------------- ------------------------------ --------------- ---------- ---------- -------- ---------- -------- ------------- ------------- -------
+MERCURY              SINDPASS\SVR-APLICACAO    SINDPASS\valeria               SVR-APLICACAO          550       1375 ACTIVE            2 ACTIVE   00:14:34      0vamx5kxfx5dy
 
 
 

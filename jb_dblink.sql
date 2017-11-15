@@ -92,6 +92,13 @@ END;
 
 
 
+create procedure OWNER.create_dblink_JB as
+  begin
+  execute immediate 'COMANDO';
+end;
+/
+
+
 
 
 

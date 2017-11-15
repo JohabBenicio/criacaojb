@@ -2,7 +2,7 @@
 set serveroutput on
 set lines 200 pages 999 long 99999
 declare
-VUSU varchar2(90):=upper('&owner');
+VUSU varchar2(90):=upper('ALTAPERFORMANCE');
 
 begin
 for x in (SELECT distinct grantee FROM dba_role_privs where grantee in (VUSU))LOOP
@@ -26,9 +26,9 @@ END LOOP;
 for x in (select privilege,owner,table_name,grantee,DECODE(grantable,'YES','WITH GRANT OPTION;',';') grantable from dba_tab_privs where grantee in (VUSU))loop
 
 if x.privilege = 'WRITE' or x.privilege = 'READ' then
-    dbms_output.put_line('grant '||x.privilege||' on directory '||x.OWNER||'.'||x.TABLE_NAME||' to '||x.GRANTEE||' '||x.grantable);
+    dbms_output.put_line('grant '||x.privilege||' on directory '||x.OWNER||'.'||chr(39)||x.TABLE_NAME||chr(39)||' to '||x.GRANTEE||' '||x.grantable);
 else
-    dbms_output.put_line('grant '||x.privilege||' on '||x.OWNER||'.'||x.TABLE_NAME||' to '||x.GRANTEE||' '||x.grantable);
+    dbms_output.put_line('grant '||x.privilege||' on '||x.OWNER||'.'||chr(39)||x.TABLE_NAME||chr(39)||' to '||x.GRANTEE||' '||x.grantable);
 end if;
 
 end loop;

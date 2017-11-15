@@ -4,11 +4,29 @@ rm -f /tmp/confbkp.sh
 vi /tmp/confbkp.sh
 i
 #!/bin/bash
+#
+# Versao: 1.2.1
+#
+
 
 case $1 in
+    "dryrun")
+
+while read backups
+do
+  DB=${backups%.*}
+  while read v_jobs
+  do
+    JOB=${v_jobs%.*}
+    $ODS_HOME/bin/orabkp backup -d $DB -j $JOB -dryrun
+    mv $ODS_HOME/bulletin/.dry.$DB.$JOB $ODS_HOME/bulletin/$DB.$JOB
+  done < <(cat $ODS_HOME/config/$backups | grep -i "job_type")
+done < <(ls $ODS_HOME/config | grep -vi "default.conf" | grep ".conf")
+exit;
+;;
     "cron")
 cat <<EOF
-
+LANG=""
 ODS_HOME=$ODS_HOME
 ##################################################################################################################
 #                                    TEOR TECNOLOGIA ORIENTADA                                                   #
@@ -19,11 +37,16 @@ ODS_HOME=$ODS_HOME
 #+---------------------------------------------------------------------------------------------------------------+
 ## BACKUP FISICO                                                                                                 |
 EOF
+VCRON_QTD=0
 while read backups
 do
 DB=${backups%.*}
+if [ $VCRON_QTD -eq 1 ]; then
+    echo " ";
+else
+    VCRON_QTD=1
+fi;
 cat <<EOF
-
 #+---------------------------------------------------------------------------------------------------------------+
 # BANCO $DB
 #+---------------------------------------------------------------------------------------------------------------+
@@ -33,21 +56,64 @@ EOF
 while read v_jobs
 do
 JOB=${v_jobs%.*}
+if [ "$JOB" == "archive" ]; then
+cat <<JB
+  03     *     *        *      *       \$ODS_HOME/bin/orabkp backup -d $DB -j $JOB
+JB
+else
 cat <<JB
   00     00    *        *      *       \$ODS_HOME/bin/orabkp backup -d $DB -j $JOB
 JB
+fi;
+
 done < <(cat $ODS_HOME/config/$backups | grep -i "job_type")
 while read v_jobs
 do
 JOB=${v_jobs%.*}
+
+if [ "$JOB" == "archive" ]; then
+cat <<JB
+  40     02    *        *      *       \$ODS_HOME/bin/orabkp purge -d $DB -j $JOB
+JB
+elif [ "$JOB" == "diario" ]; then
+cat <<JB
+  40     03    *        *      *       \$ODS_HOME/bin/orabkp purge -d $DB -j $JOB
+JB
+else
 cat <<JB
   00     00    *        *      *       \$ODS_HOME/bin/orabkp purge -d $DB -j $JOB
 JB
+fi;
+
 done < <(cat $ODS_HOME/config/$backups | grep -i "job_type")
 done < <(ls $ODS_HOME/config | grep -vi "default.conf" | grep ".conf")
 echo -e "\n\n"
 exit
+;;
+    "install")
+clear
+cat <<EOF
+##############################################################
+# Welcome to the confbkp - 1.2.1
 
+EOF
+sleep 3;
+;;
+    *)
+clear
+cat <<EOF
+
+Informe $0 <opcao>
+
+Valores para opcao:
+    install:    Configurar os jobs de backup para as bases.
+    dryrun:     Preparar os bulletins para ajudar no monitoramento.
+    cron:       Preparar um template do crontab
+
+
+
+EOF
+exit;
 ;;
 esac
 
@@ -297,8 +363,8 @@ Descrição: Especifica o tamanho máximo de cada backuppiece gerado pelo RMAN: 
 
 Valores Aceitos: Numérico com um especificador em megabytes ou gigabytes.
 Exemplos:
-• 8G (oito gigabytes)
-• 512M (quinhentos e doze megabytes)
+* 8G (oito gigabytes)
+* 512M (quinhentos e doze megabytes)
 
 EOF
 read -p "Informe TAMANHO MAXIMO de cada peca de backup: " rman_maxpiecesize
@@ -320,15 +386,15 @@ Exemplos:
 Há duas formas de especificar este parâmetro, conforme abaixo:
 
 Formato 1: especificação por intervalo de minutos, horas ou dias. Exemplos:
-• 2h   (o backup roda a cada 2 horas)
-• 30m  (o backup roda a cada 30 minutos)
-• 4d   (o backup roda a cada 4 dias)
+* 2h   (o backup roda a cada 2 horas)
+* 30m  (o backup roda a cada 30 minutos)
+* 4d   (o backup roda a cada 4 dias)
 
 Formato 2: especificação baseada em calendário. Neste modelo é possível especificar com exatidão os dias e horários esperados de execução do backup. Exemplos:
-• 23:30                     (o backup roda as 23:30)
-• 14:00,18:00               (o backup roda as 14:00 e as 18:00)
-• 22:00 seg,ter,qua,qui,sex (o backup roda de segunda a sexta as 22:00)
-• 10:00,18:001,15           (o backup roda as 10:00 e as 18:00 nos dias 1 e 15 de cada mes)
+* 23:30                     (o backup roda as 23:30)
+* 14:00,18:00               (o backup roda as 14:00 e as 18:00)
+* 22:00 seg,ter,qua,qui,sex (o backup roda de segunda a sexta as 22:00)
+* 10:00,18:001,15           (o backup roda as 10:00 e as 18:00 nos dias 1 e 15 de cada mes)
 
 EOF
 read -p "Informe a FREQUENCIA: " job_frequency
@@ -350,8 +416,8 @@ JOB DE BACKUP: $v_job
 Descrição: Especifica a duração estimada do job. Este parâmetro é utilizado para gerar
 dados adicionais para auxiliar no monitoramento de “atraso” dos backups.
 
-• 30m (30 minutos)
-• 2h  (2 horas)
+* 30m (30 minutos)
+* 2h  (2 horas)
 
 EOF
 read -p "Informe a DURACAO: " job_duration
@@ -402,7 +468,7 @@ function f_home_oracle (){
 clear
 L=$(($(echo $DATABASE|wc -m)-2 ));
 DB=$(echo $DATABASE | cut -c 1-$L);
-if [ ! -e "$ODS_HOME/config/$DATABASE.conf" ] && [ ! -e "$ODS_HOME/config/$DB.conf" ]  ; then
+if [ ! -e "$NAME_FILE" ] && [ ! -e "$NAME_FILE" ]  ; then
 
 cat <<EOF
 ################################################################################
@@ -427,10 +493,11 @@ EOF
 
 else
 
-if [ -e "$ODS_HOME/config/$DATABASE.conf" ] 2>>/dev/null ; then
-    OHOME=$(grep -i oracle_home $ODS_HOME/config/$DATABASE.conf)
+
+if [ -e "$NAME_FILE" ] 2>>/dev/null ; then
+    OHOME=$(grep -i oracle_home $NAME_FILE)
 else
-    OHOME=$(grep -i oracle_home $ODS_HOME/config/$DB.conf)
+    OHOME=$(grep -i oracle_home $NAME_FILE)
 fi
 
 ORACLE_HOME=${OHOME#*=}
@@ -447,6 +514,7 @@ fi
 f_home_oracle
 
 
+
 function f_jretencao (){
 
 cat <<EOF
@@ -457,8 +525,8 @@ Descrição: Especifica a política para apagar os backups considerados obsoleto
 
 Valores Aceitos: Especificação de expurgo após um número de horas ou dias.
 Exemplos:
-• 8h (o backup deve ser apagado quando tiver 8 ou mais horas de idade)
-• 15d (o backup deve ser apagado quando tiver 15 ou mais dias de idade)
+* 8h (o backup deve ser apagado quando tiver 8 ou mais horas de idade)
+* 15d (o backup deve ser apagado quando tiver 15 ou mais dias de idade)
 
 $(grep -i DBID /tmp/rman_parameters.txt)
 (...)
@@ -470,6 +538,9 @@ if [ -z "$rman_retention_policy" ]; then
     echo "Opcao nao valida, tente novamente."; sleep 2; f_jretencao
 fi
 
+export DB_NAME_FILE=$(grep "target database:" /tmp/rman_parameters.txt | cut -d ":" -f 2 | cut -d ' ' -f 2)
+export NAME_FILE="$ODS_HOME/config/$DB_NAME_FILE.conf"
+
 }
 
 f_jretencao
@@ -477,27 +548,33 @@ f_jretencao
 
 
 function f_jretencao_archive (){
-
+if [ "$v_val" -eq "0" ]; then
+clear
 cat <<EOF
-
-
 ###############################################################################
 Descrição: Excluir do disco os archived redo logs incluídos no job de backup ou que atendam à política de retenção em disco: JOB DE BACKUP $v_job
 
 Valores Aceitos: Especificação de expurgo após um número de horas ou dias.
 Exemplos:
-• 8h (o backup deve ser apagado quando tiver 8 ou mais horas de idade)
-• 15d (o backup deve ser apagado quando tiver 15 ou mais dias de idade)
+* INPUT: exclui do disco todos os archived redo logs que estão sendo incluídos no job de backup. Basicamente, é a opção “DELETE INPUT” do RMAN.
+
+* 999B: exclui do disco todos os archived redo logs para os quais já foram feitos N ou mais backups.
+
+   Exemplo: rman_delete_archive=2B, apague todos os archives com 2 ou mais backups.
+
+* 999H: exclui do disco todos os archived redo logs que foram gerados há n horas atrás. Esta opção é útil principalmente quando os archives precisam permanecer no disco para atualizar um banco standby.
+
+   Exemplo: rman_delete_archive=12H, apague todos os archives gerados há mais de 12 horas.
 
 EOF
-read -p "Informe se deseja: " rman_retention_policy
+read -p "Informe a RETENCAO DOS ARCHIVES: " rman_delete_archive
 if [ -z "$rman_retention_policy" ]; then
     echo "Opcao nao valida, tente novamente."; sleep 2; f_jretencao_archive
 fi
-
+fi;
 }
 
-# f_jretencao_archive
+f_jretencao_archive
 
 
 function f_instance_list (){
@@ -527,13 +604,25 @@ if [ $VALID -gt 0 ]; then
         ADB0=${v_instance_list#Instance }
         ADB1=${ADB0% is*}
         VHOST=${v_instance_list#*node }
+        VALID_HOST=$(echo $VHOST | grep "." | wc -l)
+
+        if [ $VALID_HOST -gt 0 ]; then
+            VHOST=$(echo $VHOST | cut -d "." -f 1 )
+        fi
+
         instance_list=$instance_list$DEL$VHOST,$ADB1$DEL
         DEL=':'
     done < <(srvctl status database -d $DATABASE)
     DB=$DATABASE
 else
     DB=$DATABASE
-    instance_list="$(hostname),$DB"
+    VHOST=$(hostname)
+    VALID_HOST=$(echo $VHOST | grep "." | wc -l)
+
+    if [ $VALID_HOST -gt 0 ]; then
+        VHOST=$(echo $VHOST | cut -d "." -f 1 )
+    fi
+    instance_list="$VHOST,$DB"
 fi
 else
 
@@ -551,16 +640,33 @@ else
                 ADB0=${v_instance_list#Instance }
                 ADB1=${ADB0% is*}
                 VHOST=${v_instance_list#*node }
+
+                VALID_HOST=$(echo $VHOST | grep "." | wc -l)
+
+                if [ $VALID_HOST -gt 0 ]; then
+                    VHOST=$(echo $VHOST | cut -d "." -f 1 )
+                fi
+
                 instance_list=$VHOST,$ADB1$DEL$instance_list
                 DEL=':'
             done < <(srvctl status database -d $DB)
         else
             DB=$DATABASE
-            instance_list="$(hostname),$DB"
+            VHOST=$(hostname)
+            VALID_HOST=$(echo $VHOST | grep "." | wc -l)
+            if [ $VALID_HOST -gt 0 ]; then
+                VHOST=$(echo $VHOST | cut -d "." -f 1 )
+            fi
+            instance_list="$VHOST,$DB"
         fi
     else
         DB=$DATABASE
-        instance_list="$(hostname),$DB"
+        VHOST=$(hostname)
+        VALID_HOST=$(echo $VHOST | grep "." | wc -l)
+        if [ $VALID_HOST -gt 0 ]; then
+            VHOST=$(echo $VHOST | cut -d "." -f 1 )
+        fi
+        instance_list="$VHOST,$DB"
     fi
 fi
 
@@ -606,10 +712,10 @@ if [ $VALID -gt 0 ]; then
 PARMS=$DESTINO
 fi
 
-if [ ! -e "$ODS_HOME/config/$DATABASE.conf" ] && [ ! -e "$ODS_HOME/config/$DB.conf" ]  ; then
+if [ ! -e "$NAME_FILE" ] && [ ! -e "$NAME_FILE" ]  ; then
 cat <<EOF
 
-cat <<JB>>$ODS_HOME/config/$DB.conf
+cat <<JB>>$NAME_FILE
 ORACLE_HOME=$ORACLE_HOME
 rman_device_type=$rman_device_type
 instance_list=$instance_list
@@ -658,13 +764,16 @@ fi
 if [ ! -z "$vFILEPERSET" ]; then
 echo "$vFILEPERSET" >> /tmp/$DB.conf
 fi
+if [ ! -z "$rman_delete_archive" ]; then
+echo "$v_job.rman_delete_archive=$rman_delete_archive" >> /tmp/$DB.conf
+fi
 if [ ! -z "$plus_arch" ]; then
 echo "$plus_arch" >> /tmp/$DB.conf
 fi
 echo "$v_job.rman_compressed=Y">>/tmp/$DB.conf
 
 
-echo "cat <<JB>>$ODS_HOME/config/$DB.conf"
+echo "cat <<JB>>$NAME_FILE"
 cat /tmp/$DB.conf
 rm -f /tmp/$DB.conf
 

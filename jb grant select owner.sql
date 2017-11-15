@@ -23,3 +23,7 @@ END;
 set lines 200 pages 9999
 select * from dba_tab_privs where GRANTEE='VIEW_ORCL';
 
+
+
+
+
